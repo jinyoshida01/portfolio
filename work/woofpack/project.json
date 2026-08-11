@@ -1,0 +1,38 @@
+{
+  "title": "Woofpack",
+  "date": "2021-10",
+  "year": "2021",
+  "highlight": true,
+  "badge": "Concept",
+  "short": "Branding · Illustration",
+  "tags": [
+    "Brand concept",
+    "App UI",
+    "Packaging"
+  ],
+  "summary": "A brand concept for Woofpack, combining fresh dog meal kits with an interactive user experience, brought to life through illustrated app UI, landing page, recipe brochures, packaging, and marketing materials.",
+  "meta": {
+    "Client": "Brand concept",
+    "Industry": "Pet food",
+    "Year": "2021",
+    "Software": "Photoshop, Illustrator",
+    "Deliverables": "App UI, website landing page, recipe brochures, packaging, marketing materials"
+  },
+  "blocks": [
+    {
+      "label": "Overview",
+      "heading": "Meal kits you actually make yourself.",
+      "paras": [
+        "Woofpack is a brand concept centered on providing dog owners with fresh recipes and ingredients to create meals at home. It offers a hands-on, engaging experience with full control over the preparation process.",
+        "Drawing on both my illustration and design skills, I drafted an app UI, website landing page, recipe brochures, packaging, and various marketing materials to create a cohesive and unified brand experience."
+      ]
+    },
+    {
+      "label": "Colour &amp; illustration",
+      "heading": "Earthy, but not earnest.",
+      "paras": [
+        "The visual identity features earthy green tones paired with brush-style doodle illustrations, conveying a natural, healthy aesthetic with a playful, handcrafted feel."
+      ]
+    }
+  ]
+}

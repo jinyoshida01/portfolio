@@ -1,0 +1,37 @@
+{
+  "title": "Dock for Square Reader Guide",
+  "date": "2023-04",
+  "year": "2023",
+  "highlight": true,
+  "badge": "Bosstab",
+  "short": "Video · Copy",
+  "tags": [
+    "Videography",
+    "Copywriting",
+    "Video editing"
+  ],
+  "summary": "Organized, directed and edited Bosstab’s Getting Started Guide for the Dock for Square Reader, including scripting and filming several installation shots.",
+  "meta": {
+    "Client": "Bosstab",
+    "Industry": "Retail security",
+    "Year": "2023",
+    "Software": "Premiere Pro, After Effects",
+    "Deliverables": "Getting Started Guide video: script, direction, filming and edit"
+  },
+  "blocks": [
+    {
+      "label": "Overview",
+      "heading": "Script, shoot, cut.",
+      "paras": [
+        "Organized, directed and edited Bosstab’s Getting Started Guide for the Dock for Square Reader, including scripting and filming several installation shots."
+      ]
+    },
+    {
+      "label": "B-roll footage",
+      "heading": "Extra angles for the steps that need them.",
+      "paras": [
+        "Additional footage from various angles was captured to visually emphasize key narrated steps."
+      ]
+    }
+  ]
+}

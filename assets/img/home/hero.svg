@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080" role="img">
+  <defs><linearGradient id="hb" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#1C1C23"/><stop offset="1" stop-color="#09090B"/></linearGradient>
+  <radialGradient id="hbkey" cx="0.3" cy="0.34" r="0.7">
+    <stop offset="0" stop-color="#EFEBE3" stop-opacity="0.16"/>
+    <stop offset="1" stop-color="#EFEBE3" stop-opacity="0"/></radialGradient>
+  <radialGradient id="hbrim" cx="0.74" cy="0.7" r="0.5">
+    <stop offset="0" stop-color="#EFEBE3" stop-opacity="0.05"/>
+    <stop offset="1" stop-color="#EFEBE3" stop-opacity="0"/></radialGradient>
+  <filter id="grain" x="-5%" y="-5%" width="110%" height="110%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3" stitchTiles="stitch" result="n"/>
+    <feColorMatrix in="n" type="saturate" values="0"/>
+    <feComponentTransfer><feFuncA type="linear" slope="0.16"/></feComponentTransfer>
+  </filter></defs>
+  <rect width="1920" height="1080" fill="url(#hb)"/>
+  <rect width="1920" height="1080" fill="url(#hbkey)"/>
+  <rect width="1920" height="1080" fill="url(#hbrim)"/>
+  <rect x="0" y="680" width="1920" height="1" fill="#EFEBE3" opacity="0.10"/>
+  <rect x="422" y="356" width="106" height="324" fill="#EFEBE3" opacity="0.16"/>
+  <ellipse cx="475" cy="686" rx="74" ry="13" fill="#08080A" opacity="0.5"/>
+  <rect x="595" y="227" width="144" height="454" fill="#EFEBE3" opacity="0.22"/>
+  <ellipse cx="667" cy="686" rx="101" ry="13" fill="#08080A" opacity="0.5"/>
+  <rect x="806" y="421" width="96" height="259" fill="#EFEBE3" opacity="0.13"/>
+  <ellipse cx="854" cy="686" rx="67" ry="13" fill="#08080A" opacity="0.5"/>
+  <rect x="998" y="292" width="173" height="389" fill="#EFEBE3" opacity="0.18"/>
+  <ellipse cx="1085" cy="686" rx="121" ry="13" fill="#08080A" opacity="0.5"/>
+  <rect x="1286" y="464" width="115" height="216" fill="#EFEBE3" opacity="0.11"/>
+  <ellipse cx="1344" cy="686" rx="81" ry="13" fill="#08080A" opacity="0.5"/>
+  <rect x="0" y="0" width="1920" height="1080" fill="none" stroke="#EFEBE3" stroke-width="2" opacity="0.07"/>
+  <text x="960" y="562" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" font-size="34" fill="#EFEBE3" opacity="0.34" letter-spacing="8">HERO IMAGE</text>
+  <rect width="1920" height="1080" filter="url(#grain)" opacity="0.55"/>
+</svg>

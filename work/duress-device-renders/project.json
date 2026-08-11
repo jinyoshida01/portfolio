@@ -1,0 +1,51 @@
+{
+  "title": "Duress Device Renders",
+  "date": "2025-03",
+  "year": "2024/25",
+  "highlight": true,
+  "badge": "Duress",
+  "short": "3D · Tooling",
+  "tags": [
+    "3D rendering",
+    "Plugin development",
+    "Batch exports"
+  ],
+  "summary": "A comprehensive rendered asset library for all Duress devices and accessories, including all UI screen variations. A custom Photoshop plugin was developed to reduce batch export times.",
+  "meta": {
+    "Client": "Duress",
+    "Industry": "Safety technology",
+    "Year": "2024/25",
+    "Software": "Photoshop, Illustrator, KeyShot, Blender",
+    "Deliverables": "Full rendered asset library, all UI screen variations, custom Photoshop UXP plugin"
+  },
+  "blocks": [
+    {
+      "label": "Overview",
+      "heading": "One library, every device, every angle.",
+      "paras": [
+        "I developed a streamlined workflow to create a comprehensive library of rendered assets for every Duress device and accessory. Starting with 3D modeling in Blender and rendering in Keyshot, I implemented consistent angles, file naming, and a custom Photoshop plugin to batch-generate all screen variations across artboards."
+      ]
+    },
+    {
+      "label": "3D modelling &amp; rendering",
+      "heading": "Model in Blender, light in KeyShot.",
+      "paras": [
+        "3D modelling started in Blender with some devices needing topology refining. These were then put into Keyshot and set up with lighting, materials and cameras for batch rendering."
+      ]
+    },
+    {
+      "label": "Angles &amp; naming",
+      "heading": "Forty-five degrees at a time.",
+      "paras": [
+        "Angles were sorted in 45 degree increments for an expansive library of render assets. Naming conventions were clear, marked with the device color, angle and screen content (e.g. <code>eagle-render-emergency-black-45.png</code>)."
+      ]
+    },
+    {
+      "label": "Screen UI &amp; batch exporting",
+      "heading": "A plugin to do the boring part.",
+      "paras": [
+        "Screens were then added as a linked Photoshop file and organised in artboards. I then developed a Photoshop UXP plugin to do the batch exporting for every screen in the linked file for all artboards in the main file."
+      ]
+    }
+  ]
+}

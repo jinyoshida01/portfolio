@@ -1,0 +1,44 @@
+{
+  "title": "Firefly",
+  "date": "2023-08",
+  "year": "2023",
+  "highlight": true,
+  "badge": "Personal",
+  "short": "Branding · 3D · Video",
+  "tags": [
+    "Branding",
+    "3D rendering",
+    "Video editing"
+  ],
+  "summary": "Created an esports brand concept for the first-person shooter VALORANT, including logo design, brand guidelines, graphic assets, and a promotional video.",
+  "meta": {
+    "Client": "Personal project",
+    "Industry": "Esports",
+    "Year": "2023",
+    "Software": "Photoshop, Illustrator, After Effects, Premiere Pro, Blender",
+    "Deliverables": "Logo, brand guidelines, graphic assets, promotional video"
+  },
+  "blocks": [
+    {
+      "label": "Overview",
+      "heading": "An esports brand, built end to end.",
+      "paras": [
+        "I developed an esports brand concept for the popular first-person shooter VALORANT as a personal project, designing the logo, brand guidelines, graphic assets, and producing a promotional video."
+      ]
+    },
+    {
+      "label": "Brand mark",
+      "heading": "Drawn for animation from the start.",
+      "paras": [
+        "I explored brand name ideas, focusing on animals and insects, and chose Firefly for its distinctive traits to tie my outcomes visually. Inspired by the top Esports logos, I chose a minimalist style for the brand mark, thoughtfully designed with 2D animation in mind."
+      ]
+    },
+    {
+      "label": "3D models",
+      "heading": "In-game assets, re-lit and re-shot.",
+      "paras": [
+        "For the video, I extracted the in-game 3D models and imported their existing animations, replacing their original textures with custom monochromatic ones. I then animated multiple camera angles per scene to sequentially showcase all five characters, emphasizing their unique abilities recolored."
+      ]
+    }
+  ]
+}

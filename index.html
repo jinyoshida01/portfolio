@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Jin Yoshida · Multidisciplinary Designer, Melbourne</title>
+<meta name="description" content="Multidisciplinary designer based in Melbourne, crafting purposeful, visually engaging work across print, digital, 3D, and web.">
+<meta name="author" content="Jin Yoshida">
+<meta name="theme-color" content="#08080a">
+<link rel="canonical" href="https://www.jinyoshida.me/">
+
+<!-- social preview -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Jin Yoshida · Multidisciplinary Designer, Melbourne">
+<meta property="og:description" content="Purposeful, visually engaging work across print, digital, 3D, and web.">
+<meta name="twitter:card" content="summary_large_image">
+<!--BUILD:social-->
+<meta property="og:image" content="https://www.jinyoshida.me/assets/img/site/og.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Jin Yoshida - multidisciplinary designer, Melbourne">
+<meta name="twitter:image" content="https://www.jinyoshida.me/assets/img/site/og.png">
+<link rel="icon" href="assets/img/site/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="assets/img/site/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="assets/img/site/apple-touch-icon.png">
+<!--/BUILD:social-->
+<link rel="preload" href="assets/fonts/sora-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/space-mono-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/style.css">
+<!-- Without JS the preloader never lifts and the reveals never fire, so the
+     page would sit blank behind a black panel. This hands it straight over. -->
+<noscript><style>
+  body.is-loading { overflow: auto; height: auto; }
+  .loader { display: none !important; }
+  [data-reveal], [data-stagger] > *, .ln__i, .ch { opacity: 1 !important; transform: none !important; }
+</style></noscript>
+</head>
+
+<body class="is-loading">
+
+<a class="skip" href="#main">Skip to content</a>
+<div class="grain" aria-hidden="true"></div>
+
+<!-- preloader ---------------------------------------------------------- -->
+<div class="loader" role="status" aria-live="polite">
+  <div class="loader__inner">
+    <div class="loader__word"><span>Jin Yoshida</span></div>
+    <div class="loader__bar"><i></i></div>
+    <div class="loader__meta">
+      <span>Melbourne · AU</span>
+      <span><span data-loader-pct>000</span>%</span>
+    </div>
+  </div>
+</div>
+
+<!-- navigation --------------------------------------------------------- -->
+<header class="nav">
+  <div class="shell nav__row">
+    <!-- Three slots: the clock on the left, the mark in the middle, the links
+         on the right. The two outer columns are the same flex basis so the
+         mark sits on the page's true centre, not on the centre of whatever
+         is left over. -->
+    <p class="nav__clock mono"><span class="nav__city">Melbourne, AU</span><span data-clock>--:--:--</span></p>
+
+    <a class="brand" href="index.html" aria-label="Jin Yoshida — home">
+      Jin Yoshida
+    </a>
+
+    <div class="nav__end">
+      <nav class="nav__links" aria-label="Primary">
+        <a href="work/index.html">Work</a>
+        <a href="about/index.html">About</a>
+      </nav>
+      <a class="btn nav__cta" href="#contact">
+        Get in touch <span class="btn__arrow" aria-hidden="true">→</span>
+      </a>
+    </div>
+
+    <button class="burger" aria-label="Menu" aria-expanded="false" aria-controls="sheet">
+      <i aria-hidden="true"></i><i aria-hidden="true"></i>
+    </button>
+  </div>
+</header>
+
+<!-- mobile menu -------------------------------------------------------- -->
+<div class="sheet" id="sheet" aria-hidden="true">
+  <nav class="sheet__links" aria-label="Mobile">
+    <a href="work/index.html">Work <span class="num">01</span></a>
+    <a href="about/index.html">About <span class="num">02</span></a>
+    <a href="#contact">Contact <span class="num">03</span></a>
+  </nav>
+  <div class="sheet__foot mono">
+    <a class="link" href="mailto:jinyoshida.design@gmail.com">jinyoshida.design@gmail.com</a>
+  </div>
+</div>
+
+<main id="main">
+
+  <!-- hero ------------------------------------------------------------- -->
+  <!-- Instrument-panel layout: technical readouts pinned to the corners, the
+       portrait floating in the middle, and the name set across the bottom at
+       the largest size that fits the viewport whole. The wordmark sits in
+       front of the portrait — that overlap is the whole composition. -->
+  <section class="hero hero--stage">
+    <div class="hero__bg" aria-hidden="true">
+      <div class="hero__aura-wrap">
+        <div class="hero__aura"></div>
+      </div>
+    </div>
+
+    <div class="shell hero__stage">
+
+      <!-- top left: contact, then the one-line pitch -->
+      <div class="hero__intro">
+        <p class="hero__pitch">
+          Multidisciplinary designer crafting purposeful, visually engaging work
+          across print, digital, 3D, and web.
+        </p>
+
+        <!-- EDIT ▸ your signature. There isn't one at the moment. To add it,
+             drop a file into assets/img/site/ named signature.svg, .png, .jpg
+             or .webp — whichever you have — and rebuild. A plain photo of a
+             signature on white paper works as-is; see START HERE.md. Nothing
+             renders while the file is absent. -->
+        <span class="sig" aria-hidden="true"><!--BUILD:signature--><!--/BUILD:signature--></span>
+      </div>
+
+      <!-- top right: availability -->
+      <!-- EDIT ▸ availability. Delete this line if you'd rather not advertise it.
+           Add class "is-open" back for the green pulsing dot when you're taking
+           work again. -->
+      <p class="hero__avail"><i aria-hidden="true"></i> Commissions closed</p>
+
+
+    </div>
+
+    <!-- EDIT ▸ your photo. Put it in assets/img/home/ named hero.jpg — .png,
+         .webp and .avif work too — and rebuild. That's the whole change;
+         nothing in this file needs touching, and the .jpg takes precedence
+         over the placeholder hero.svg automatically.
+         This band is horizontal, so a 16:9 crop fits it exactly. Export it
+         about 1800px wide. The band runs off the right edge of the page, so
+         put the part that matters on the left of the frame. -->
+    <div class="hero__object">
+      <!--BUILD:home-hero-->
+      <img class="hero__portrait" src="assets/img/home/hero.jpg"
+           alt="Jin Yoshida"
+           width="1920" height="1080" loading="eager" decoding="async">
+    <!--/BUILD:home-hero-->
+    </div>
+
+    <!-- The name and the rail sit outside the shell so their edges are the
+         page's, not the shell's padding box. -->
+    <div class="hero__markwrap">
+      <p class="hero__disc mono">
+        <span class="rotator" data-rotate="graphic designer,3D generalist,motion designer,web designer,photographer">graphic designer</span>
+      </p>
+      <h1 class="display hero__mark" data-chars data-magnetic-chars aria-label="Jin Yoshida">Jin Yoshida</h1>
+    </div>
+
+    <!-- bottom rail: live viewport readout, scroll cue, copyright -->
+    <div class="hero__rail mono" aria-hidden="true">
+      <span data-viewport>0000 x 0000</span>
+      <span class="hero__scroll">Scroll</span>
+      <span>&copy; <span data-year>2026</span></span>
+    </div>
+
+  </section>
+
+  <!-- selected work ---------------------------------------------------- -->
+  <section class="section" id="work">
+    <div class="shell">
+
+      <div class="section-head">
+        <p class="eyebrow">Selected work <span class="num">/ <!--BUILD:count-->08<!--/BUILD:count--></span></p>
+        <h2 class="display section-head__title" data-split>What I’ve worked on.</h2>
+      </div>
+
+      <!-- Cards below are generated by tools/build.py from the project folders
+           in work/. Edit those, not this — anything typed between the markers is
+           overwritten on the next build. -->
+      <div class="rail__meta" aria-hidden="true">
+        <span class="rail__count"><b data-rail-i>01</b> / <!--BUILD:count2-->08<!--/BUILD:count2--></span>
+        <span class="rail__line"><i data-rail-bar></i></span>
+        <span class="rail__hint">Scroll</span>
+      </div>
+    </div>
+
+    <!-- Horizontal rail. The section is taller than the screen; the row inside
+         is pinned and slides sideways as you scroll past it. On phones and
+         under reduced motion it falls back to the ordinary stack — see the CSS. -->
+    <div class="rail" data-rail>
+      <div class="rail__pin">
+        <div class="rail__track" data-rail-track>
+        <!--BUILD:work-grid-->
+        <article class="work__item">
+          <a class="card" href="work/duress-brochures/index.html" aria-label="Duress Brochures — publication design · 3d rendering">
+            <div class="frame" data-clip>
+              <img class="frame__media" src="work/duress-brochures/images/cover.jpg" alt="Duress Brochures - cover image" width="1920" height="1080" loading="eager" decoding="async">
+              <div class="frame__veil" aria-hidden="true"></div>
+              <span class="frame__badge">Duress</span>
+              <div class="frame__cta" aria-hidden="true">
+                <b>Publication · 3D</b>
+                <span>View project →</span>
+              </div>
+            </div>
+            <div class="card__foot">
+              <h3 class="card__title">Duress Brochures</h3>
+              <p class="card__meta">
+                <span class="card__tags">Publication design · 3D rendering</span>
+                <span class="card__year">2024/25</span>
+              </p>
+            </div>
+          </a>
+        </article>
+
+        <article class="work__item">
+          <a class="card" href="work/duress-device-renders/index.html" aria-label="Duress Device Renders — 3d rendering · plugin development · batch exports">
+            <div class="frame" data-clip>
+              <img class="frame__media" src="work/duress-device-renders/images/cover.jpg" alt="Duress Device Renders - cover image" width="1919" height="1080" loading="eager" decoding="async">
+              <div class="frame__veil" aria-hidden="true"></div>
+              <span class="frame__badge">Duress</span>
+              <div class="frame__cta" aria-hidden="true">
+                <b>3D · Tooling</b>
+                <span>View project →</span>
+              </div>
+            </div>
+            <div class="card__foot">
+              <h3 class="card__title">Duress Device Renders</h3>
+              <p class="card__meta">
+                <span class="card__tags">3D rendering · Plugin development · Batch exports</span>
+                <span class="card__year">2024/25</span>
+              </p>
+            </div>
+          </a>
+        </article>
+
+        <article class="work__item">
+          <a class="card" href="work/firefly/index.html" aria-label="Firefly — branding · 3d rendering · video editing">
+            <div class="frame" data-clip>
+              <img class="frame__media" src="work/firefly/images/cover.jpg" alt="Firefly - cover image" width="1920" height="1080" loading="lazy" decoding="async">
+              <div class="frame__veil" aria-hidden="true"></div>
+              <span class="frame__badge">Personal</span>
+              <div class="frame__cta" aria-hidden="true">
+                <b>Branding · 3D · Video</b>
+                <span>View project →</span>
+              </div>
+            </div>
+            <div class="card__foot">
+              <h3 class="card__title">Firefly</h3>
+              <p class="card__meta">
+                <span class="card__tags">Branding · 3D rendering · Video editing</span>
+                <span class="card__year">2023</span>
+              </p>
+            </div>
+          </a>
+        </article>
+
+        <article class="work__item">
+          <a class="card" href="work/bosstab-product-viewer/index.html" aria-label="Bosstab Product Viewer — 3d modelling · web application">
+            <div class="frame" data-clip>
+              <img class="frame__media" src="work/bosstab-product-viewer/images/cover.jpg" alt="Bosstab Product Viewer - cover image" width="1920" height="1080" loading="lazy" decoding="async">
+              <div class="frame__veil" aria-hidden="true"></div>
+              <span class="frame__badge">Bosstab</span>
+              <div class="frame__cta" aria-hidden="true">
+                <b>3D · Web app</b>
+                <span>View project →</span>
+              </div>
+            </div>
+            <div class="card__foot">
+              <h3 class="card__title">Bosstab Product Viewer</h3>
+              <p class="card__meta">
+                <span class="card__tags">3D modelling · Web application</span>
+                <span class="card__year">2023</span>
+              </p>
+            </div>
+          </a>
+        </article>
+
+        <article class="work__item">
+          <a class="card" href="work/dock-for-square-reader-guide/index.html" aria-label="Dock for Square Reader Guide — videography · copywriting · video editing">
+            <div class="frame" data-clip>
+              <img class="frame__media" src="work/dock-for-square-reader-guide/images/cover.jpg" alt="Dock for Square Reader Guide - cover image" width="1920" height="1080" loading="lazy" decoding="async">
+              <div class="frame__veil" aria-hidden="true"></div>
+              <span class="frame__badge">Bosstab</span>
+              <div class="frame__cta" aria-hidden="true">
+                <b>Video · Copy</b>
+                <span>View project →</span>
+              </div>
+            </div>
+            <div class="card__foot">
+              <h3 class="card__title">Dock for Square Reader Guide</h3>
+              <p class="card__meta">
+                <span class="card__tags">Videography · Copywriting · Video editing</span>
+                <span class="card__year">2023</span>
+              </p>
+            </div>
+          </a>
+        </article>
+
+        <article class="work__item">
+          <a class="card" href="work/bosstab-sabel-photography/index.html" aria-label="Bosstab and Sabel Photography — product photography · commercial photography">
+            <div class="frame" data-clip>
+              <img class="frame__media" src="work/bosstab-sabel-photography/images/cover.jpg" alt="Bosstab and Sabel Photography - cover image" width="1920" height="1080" loading="lazy" decoding="async">
+              <div class="frame__veil" aria-hidden="true"></div>
+              <span class="frame__badge">Bosstab · Sabel</span>
+              <div class="frame__cta" aria-hidden="true">
+                <b>Photography</b>
+                <span>View project →</span>
+              </div>
+            </div>
+            <div class="card__foot">
+              <h3 class="card__title">Bosstab &amp; Sabel Photography</h3>
+              <p class="card__meta">
+                <span class="card__tags">Product photography · Commercial photography</span>
+                <span class="card__year">2022/23</span>
+              </p>
+            </div>
+          </a>
+        </article>
+
+        <article class="work__item">
+          <a class="card" href="work/woofpack/index.html" aria-label="Woofpack — brand concept · app ui · packaging">
+            <div class="frame" data-clip>
+              <img class="frame__media" src="work/woofpack/images/cover.jpg" alt="Woofpack - cover image" width="1920" height="1080" loading="lazy" decoding="async">
+              <div class="frame__veil" aria-hidden="true"></div>
+              <span class="frame__badge">Concept</span>
+              <div class="frame__cta" aria-hidden="true">
+                <b>Branding · Illustration</b>
+                <span>View project →</span>
+              </div>
+            </div>
+            <div class="card__foot">
+              <h3 class="card__title">Woofpack</h3>
+              <p class="card__meta">
+                <span class="card__tags">Brand concept · App UI · Packaging</span>
+                <span class="card__year">2021</span>
+              </p>
+            </div>
+          </a>
+        </article>
+
+        <article class="work__item">
+          <a class="card" href="work/everything-black-mv/index.html" aria-label="Everything Black MV — motion design · kinetic typography · vector animation">
+            <div class="frame" data-clip>
+              <img class="frame__media" src="work/everything-black-mv/images/cover.jpg" alt="Everything Black MV - cover image" width="1440" height="810" loading="lazy" decoding="async">
+              <div class="frame__veil" aria-hidden="true"></div>
+              <span class="frame__badge">Personal</span>
+              <div class="frame__cta" aria-hidden="true">
+                <b>Motion · Illustration</b>
+                <span>View project →</span>
+              </div>
+            </div>
+            <div class="card__foot">
+              <h3 class="card__title">Everything Black MV</h3>
+              <p class="card__meta">
+                <span class="card__tags">Motion design · Kinetic typography · Vector animation</span>
+                <span class="card__year">2021</span>
+              </p>
+            </div>
+          </a>
+        </article>
+
+      <!--/BUILD:work-grid-->
+        </div>
+      </div>
+    </div>
+
+    <div class="shell">
+      <p class="work__more" data-reveal>
+        <a class="link" href="work/index.html"><!--BUILD:all-link-->See all 9 projects<!--/BUILD:all-link--> →</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- contact ---------------------------------------------------------- -->
+  <section class="section cta" id="contact">
+    <div class="shell">
+      <p class="eyebrow">Contact</p>
+      <h2 class="display cta__title" data-split style="margin-top:1.5rem">
+        Get in touch.
+      </h2>
+
+      <div class="cta__row">
+        <a class="btn btn--solid" href="mailto:jinyoshida.design@gmail.com?subject=Project%20enquiry">
+          Contact me <span class="btn__arrow" aria-hidden="true">→</span>
+        </a>
+        <a class="cta__mail link link--on" href="mailto:jinyoshida.design@gmail.com">jinyoshida.design@gmail.com</a>
+      </div>
+
+      <hr class="rule" data-draw style="margin-top:clamp(2.5rem,5vw,4rem)">
+
+      <p class="prose" data-reveal style="margin-top:2rem">
+        Print, digital, 3D or web. If you have a brief, send it through. If you don’t, a
+        paragraph about the problem is plenty to start.
+      </p>
+    </div>
+  </section>
+
+</main>
+
+<!-- footer ------------------------------------------------------------- -->
+<!--BUILD:footer-->
+<footer class="footer">
+  <div class="shell">
+    <div class="footer__grid">
+      <div>
+        <h3>Location</h3>
+        <p class="prose" style="max-width:24ch">
+          Melbourne, Australia.
+        </p>
+      </div>
+      <div>
+        <h3>Navigate</h3>
+        <ul>
+          <li><a class="link" href="work/index.html">Selected work</a></li>
+          <li><a class="link" href="about/index.html">About</a></li>
+          <li><a class="link" href="about/index.html#experience">Experience</a></li>
+          <li><a class="link" href="about/index.html#capabilities">Capabilities</a></li>
+          <li><a class="link" href="about/index.html#skills">Skills &amp; software</a></li>
+        </ul>
+      </div>
+      <div>
+        <!-- EDIT ▸ add LinkedIn / Instagram / Behance here when you want them -->
+        <h3>Enquiries</h3>
+        <ul>
+          <li><a class="link" href="mailto:jinyoshida.design@gmail.com">jinyoshida.design@gmail.com</a></li>
+          <li><a class="link" href="#contact">Start a conversation</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer__base">
+      <span>&copy; <span data-year>2026</span> Jin Yoshida. All rights reserved.</span>
+      <span>Melbourne, Australia</span>
+      <a class="to-top link" href="#main">Back to top <span aria-hidden="true">&uarr;</span></a>
+    </div>
+  </div>
+</footer>
+<!--/BUILD:footer-->
+
+<script src="assets/js/vendor/lenis.min.js" defer></script>
+<script src="assets/js/main.js" defer></script>
+</body>
+</html>

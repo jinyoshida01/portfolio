@@ -1,0 +1,28 @@
+{
+  "title": "Adobe Instagram Filters",
+  "date": "2021-03",
+  "year": "2021",
+  "highlight": false,
+  "badge": "Swinburne",
+  "short": "Augmented reality",
+  "tags": [
+    "Augmented reality"
+  ],
+  "summary": "A set of interchangeable Instagram filters for Swinburne’s Orientation Week and Adobe partnership events, featuring design elements drawn from Adobe Creative Suite applications.",
+  "meta": {
+    "Client": "Swinburne University",
+    "Industry": "Education",
+    "Year": "2021",
+    "Software": "Spark AR, Photoshop, Illustrator, After Effects",
+    "Deliverables": "Set of interchangeable Instagram AR filters"
+  },
+  "blocks": [
+    {
+      "label": "Overview",
+      "heading": "One set, one theme, five apps.",
+      "paras": [
+        "For Swinburne’s Orientation Week event and Adobe’s partnership seminars, I designed interchangeable Instagram filters using Meta’s Spark AR. Each filter draws on UI and creative elements from specific Adobe Creative Suite applications, creating a cohesive theme across the set."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+# macOS
+.DS_Store
+
+# The starter templates are for your machine, not the published site.
+# Git ignores them, so a GitHub Pages deploy never carries them.
+# Delete this line if you'd rather keep them in the repo.
+templates/

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img">
+  <defs><radialGradient id="ogg" cx="0.75" cy="0.2" r="0.8">
+    <stop offset="0" stop-color="#FA3C3C" stop-opacity="0.45"/>
+    <stop offset="1" stop-color="#FA3C3C" stop-opacity="0"/></radialGradient>
+  <filter id="grain" x="-5%" y="-5%" width="110%" height="110%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3" stitchTiles="stitch" result="n"/>
+    <feColorMatrix in="n" type="saturate" values="0"/>
+    <feComponentTransfer><feFuncA type="linear" slope="0.16"/></feComponentTransfer>
+  </filter></defs>
+  <rect width="1200" height="630" fill="#08080A"/>
+  <rect width="1200" height="630" fill="url(#ogg)"/>
+  <text x="72" y="330" font-family="Helvetica,Arial,sans-serif" font-weight="500" font-size="96" fill="#EFEBE3">Jin Yoshida</text>
+  <text x="76" y="392" font-family="ui-monospace,Menlo,monospace" font-size="24" fill="#EFEBE3" opacity="0.6" letter-spacing="5">MULTIDISCIPLINARY DESIGNER — MELBOURNE</text>
+  <rect x="72" y="430" width="120" height="5" fill="#FA3C3C"/>
+  <rect width="1200" height="630" filter="url(#grain)" opacity="0.55"/>
+</svg>

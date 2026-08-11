@@ -1,0 +1,129 @@
+{
+  "skillsets": [
+    {
+      "title": "Design",
+      "items": [
+        "Graphic design",
+        "Publication design",
+        "Branding",
+        "Illustration",
+        "Layout & grid",
+        "Packaging"
+      ]
+    },
+    {
+      "title": "3D & motion",
+      "items": [
+        "3D modelling",
+        "Rendering",
+        "Batch pipelines",
+        "Motion design",
+        "Kinetic typography",
+        "Video editing"
+      ]
+    },
+    {
+      "title": "Digital",
+      "items": [
+        "Web design",
+        "HTML & CSS",
+        "UX design",
+        "AI image workflows",
+        "Photography",
+        "Augmented reality"
+      ]
+    }
+  ],
+  "software": [
+    {
+      "name": "Photoshop",
+      "note": "Retouch & batch",
+      "icon": "photoshop"
+    },
+    {
+      "name": "Illustrator",
+      "note": "Vector & marks",
+      "icon": "illustrator"
+    },
+    {
+      "name": "InDesign",
+      "note": "Publication",
+      "icon": "indesign"
+    },
+    {
+      "name": "Premiere Pro",
+      "note": "Editing",
+      "icon": "premiere-pro"
+    },
+    {
+      "name": "After Effects",
+      "note": "Motion",
+      "icon": "after-effects"
+    },
+    {
+      "name": "Lightroom",
+      "note": "Colour & raw",
+      "icon": "lightroom"
+    },
+    {
+      "name": "Bridge",
+      "note": "Asset management",
+      "icon": "bridge"
+    },
+    {
+      "name": "Acrobat",
+      "note": "Preflight & proofs",
+      "icon": "acrobat"
+    },
+    {
+      "name": "Blender",
+      "note": "Modelling & rigging",
+      "icon": "blender"
+    },
+    {
+      "name": "KeyShot",
+      "note": "Batch rendering",
+      "icon": "keyshot"
+    },
+    {
+      "name": "Verge3D",
+      "note": "Web 3D",
+      "icon": "verge3d"
+    },
+    {
+      "name": "ComfyUI",
+      "note": "AI workflows",
+      "icon": "comfyui"
+    },
+    {
+      "name": "Webflow",
+      "note": "Site build",
+      "icon": "webflow"
+    },
+    {
+      "name": "WordPress",
+      "note": "Site build & upkeep",
+      "icon": "wordpress"
+    },
+    {
+      "name": "Shopify",
+      "note": "E-commerce",
+      "icon": "shopify"
+    },
+    {
+      "name": "Figma",
+      "note": "UI & handoff",
+      "icon": "figma"
+    },
+    {
+      "name": "Claude",
+      "note": "Writing & code",
+      "icon": "claude"
+    },
+    {
+      "name": "Cursor",
+      "note": "Build & edit",
+      "icon": "cursor"
+    }
+  ]
+}

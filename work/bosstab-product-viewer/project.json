@@ -1,0 +1,51 @@
+{
+  "title": "Bosstab Product Viewer",
+  "date": "2023-06",
+  "year": "2023",
+  "highlight": true,
+  "badge": "Bosstab",
+  "short": "3D · Web app",
+  "tags": [
+    "3D modelling",
+    "Web application"
+  ],
+  "summary": "A web-based 3D product viewer for Bosstab, integrated into configuration pages to showcase tablet holders with real-time customisation updates and interactive animations.",
+  "meta": {
+    "Client": "Bosstab",
+    "Industry": "Retail security",
+    "Year": "2023",
+    "Software": "Photoshop, Verge3D, Blender",
+    "Deliverables": "Web-based 3D model viewer integrated into product configuration pages"
+  },
+  "blocks": [
+    {
+      "label": "Overview",
+      "heading": "Configure it, and watch it change.",
+      "paras": [
+        "While at Bosstab, I developed a web-based 3D model viewer for their tablet holders, integrated into product configuration pages. The interactive viewer featured animations and updated the model in real time based on user customisations."
+      ]
+    },
+    {
+      "label": "Real-time viewer",
+      "heading": "Wired straight into the store.",
+      "paras": [
+        "Using Verge3D, I enabled each tablet stand model to dynamically update based on user selections on the website. This was accomplished by integrating WooCommerce with WordPress and leveraging HTML property reading modules for real-time interaction.",
+        "Additionally, the viewer recognized preset URL attributes, enabling preset configurations, useful for linking specific tablet stand setups to Google Ads and other campaigns."
+      ]
+    },
+    {
+      "label": "Seamless animations",
+      "heading": "Rigged in Blender, triggered in the browser.",
+      "paras": [
+        "Animations for hinged products were created, rigged and baked in Blender, then configured in Verge3D to play based on conditional triggers."
+      ]
+    },
+    {
+      "label": "Optimised for web",
+      "heading": "Detail kept, load time cut.",
+      "paras": [
+        "Textures were double-compressed and exported with x16 anisotropic filtering to maintain high detail. This assisted greatly in keeping the 3D viewer's loading time short on the pages."
+      ]
+    }
+  ]
+}

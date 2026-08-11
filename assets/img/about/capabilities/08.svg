@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" width="600" height="400" role="img">
+  <defs>
+  <filter id="grain" x="-5%" y="-5%" width="110%" height="110%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3" stitchTiles="stitch" result="n"/>
+    <feColorMatrix in="n" type="saturate" values="0"/>
+    <feComponentTransfer><feFuncA type="linear" slope="0.16"/></feComponentTransfer>
+  </filter></defs>
+  <rect width="600" height="400" fill="#101015"/>
+  <path d="M84 120 C144 120 204 200 264 200" fill="none" stroke="#EFEBE3" stroke-width="3" opacity="0.34"/>
+  <path d="M84 280 C144 280 204 200 264 200" fill="none" stroke="#EFEBE3" stroke-width="3" opacity="0.34"/>
+  <path d="M264 200 C324 200 372 112 432 112" fill="none" stroke="#EFEBE3" stroke-width="3" opacity="0.34"/>
+  <path d="M264 200 C324 200 372 288 432 288" fill="none" stroke="#EFEBE3" stroke-width="3" opacity="0.34"/>
+  <path d="M432 112 C492 112 468 200 528 200" fill="none" stroke="#EFEBE3" stroke-width="3" opacity="0.34"/>
+  <path d="M432 288 C492 288 468 200 528 200" fill="none" stroke="#EFEBE3" stroke-width="3" opacity="0.34"/>
+  <circle cx="84" cy="120" r="22" fill="#EFEBE3" opacity="0.44"/>
+  <circle cx="84" cy="280" r="22" fill="#EFEBE3" opacity="0.44"/>
+  <circle cx="264" cy="200" r="22" fill="#FA3C3C" opacity="1"/>
+  <circle cx="432" cy="112" r="22" fill="#EFEBE3" opacity="0.44"/>
+  <circle cx="432" cy="288" r="22" fill="#EFEBE3" opacity="0.44"/>
+  <circle cx="528" cy="200" r="22" fill="#EFEBE3" opacity="0.44"/>
+  <rect width="600" height="400" filter="url(#grain)" opacity="0.55"/>
+</svg>

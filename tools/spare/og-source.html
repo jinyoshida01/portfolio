@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>og</title>
+<style>
+  /* The card is set in the site's own faces, loaded from the site's own files,
+     so the preview and the page it links to are the same piece of design. */
+  @font-face {
+    font-family: 'Sora var'; font-style: normal; font-weight: 100 800;
+    src: url('../../assets/fonts/sora-latin-wght-normal.woff2') format('woff2-variations');
+    font-display: block;
+  }
+  @font-face {
+    font-family: 'Space Mono'; font-style: normal; font-weight: 400;
+    src: url('../../assets/fonts/space-mono-latin-400-normal.woff2') format('woff2');
+    font-display: block;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { width: 1200px; height: 630px; overflow: hidden; }
+  .card {
+    position: relative; width: 1200px; height: 630px;
+    background: #08080A; color: #EFEBE3;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 0 88px;
+  }
+  /* the same ember bloom the site's hero carries, kept well away from the type */
+  .aura {
+    position: absolute; top: -22%; right: -12%; width: 780px; height: 780px;
+    background: radial-gradient(circle, rgba(250,60,60,0.38) 0%, rgba(250,60,60,0) 68%);
+  }
+  .mark {
+    position: absolute; top: 64px; left: 88px;
+    font-family: 'Sora var'; font-weight: 700; font-size: 40px;
+    letter-spacing: -0.034em;
+  }
+  .mark i { color: #FA3C3C; font-style: normal; }
+  h1 {
+    position: relative;
+    font-family: 'Sora var'; font-weight: 700; font-size: 132px;
+    letter-spacing: -0.034em; line-height: 1.0;
+  }
+  h1 i { color: #FA3C3C; font-style: normal; }
+  .rule { position: relative; width: 132px; height: 6px; background: #FA3C3C; margin: 40px 0 34px; }
+  p {
+    position: relative;
+    font-family: 'Space Mono', monospace; font-size: 25px; letter-spacing: 0.13em;
+    text-transform: uppercase; color: rgba(239,235,227,0.62); line-height: 1.5;
+  }
+  .foot {
+    position: absolute; left: 88px; right: 88px; bottom: 56px;
+    display: flex; justify-content: space-between;
+    font-family: 'Space Mono', monospace; font-size: 20px; letter-spacing: 0.13em;
+    text-transform: uppercase; color: rgba(239,235,227,0.42);
+  }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="aura"></div>
+    <h1>Jin Yoshida<i>.</i></h1>
+    <div class="rule"></div>
+    <p>Multidisciplinary designer</p>
+    <div class="foot"><span>Melbourne, Australia</span><span>jinyoshida.me</span></div>
+  </div>
+</body>
+</html>

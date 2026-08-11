@@ -1,0 +1,37 @@
+{
+  "title": "Everything Black MV",
+  "date": "2021-06",
+  "year": "2021",
+  "highlight": true,
+  "badge": "Personal",
+  "short": "Motion · Illustration",
+  "tags": [
+    "Motion design",
+    "Kinetic typography",
+    "Vector animation"
+  ],
+  "summary": "A personal motion design project for Unlike Pluto’s Everything Black, combining kinetic typography and animated vector illustrations to craft dynamic visual sequences.",
+  "meta": {
+    "Client": "Personal project",
+    "Industry": "Music",
+    "Year": "2021",
+    "Software": "Premiere Pro, After Effects, Illustrator",
+    "Deliverables": "Music video: kinetic typography and animated vector illustration"
+  },
+  "blocks": [
+    {
+      "label": "Overview",
+      "heading": "Type that moves to the track.",
+      "paras": [
+        "A personal motion design project for the EDM track Everything Black by Unlike Pluto. I combined kinetic typography with animated vector illustrations to create distinct visual sequences."
+      ]
+    },
+    {
+      "label": "Keyframing &amp; pacing",
+      "heading": "Timed to the beat, not the timeline.",
+      "paras": [
+        "Each keyframe was carefully timed to match the rhythm and pacing of the audio."
+      ]
+    }
+  ]
+}

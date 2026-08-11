@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" width="600" height="400" role="img">
+  <defs>
+  <filter id="grain" x="-5%" y="-5%" width="110%" height="110%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3" stitchTiles="stitch" result="n"/>
+    <feColorMatrix in="n" type="saturate" values="0"/>
+    <feComponentTransfer><feFuncA type="linear" slope="0.16"/></feComponentTransfer>
+  </filter></defs>
+  <rect width="600" height="400" fill="#101015"/>
+  <rect x="54" y="64" width="228" height="272" fill="#EFEBE3" opacity="0.20"/>
+  <rect x="78" y="112" width="81" height="10" fill="#EFEBE3" opacity="0.46"/>
+  <rect x="78" y="136" width="179" height="10" fill="#EFEBE3" opacity="0.46"/>
+  <rect x="78" y="160" width="114" height="10" fill="#EFEBE3" opacity="0.46"/>
+  <rect x="78" y="184" width="167" height="10" fill="#EFEBE3" opacity="0.46"/>
+  <rect x="78" y="208" width="143" height="10" fill="#EFEBE3" opacity="0.46"/>
+  <rect x="78" y="232" width="146" height="10" fill="#EFEBE3" opacity="0.46"/>
+  <rect x="78" y="256" width="166" height="10" fill="#EFEBE3" opacity="0.46"/>
+  <rect x="78" y="280" width="117" height="10" fill="#EFEBE3" opacity="0.46"/>
+  <rect x="78" y="304" width="178" height="10" fill="#EFEBE3" opacity="0.46"/>
+  <rect x="318" y="64" width="228" height="272" fill="#EFEBE3" opacity="0.20"/>
+  <rect x="342" y="112" width="164" height="10" fill="#EFEBE3" opacity="0.46"/>
+  <rect x="342" y="136" width="148" height="10" fill="#EFEBE3" opacity="0.46"/>
+  <rect x="342" y="160" width="142" height="10" fill="#EFEBE3" opacity="0.46"/>
+  <rect x="342" y="184" width="168" height="10" fill="#EFEBE3" opacity="0.46"/>
+  <rect x="342" y="208" width="112" height="10" fill="#EFEBE3" opacity="0.46"/>
+  <rect x="342" y="232" width="179" height="10" fill="#EFEBE3" opacity="0.46"/>
+  <rect x="342" y="256" width="83" height="10" fill="#EFEBE3" opacity="0.46"/>
+  <rect x="342" y="280" width="178" height="10" fill="#EFEBE3" opacity="0.46"/>
+  <rect x="342" y="304" width="116" height="10" fill="#EFEBE3" opacity="0.46"/>
+  <rect x="78" y="88" width="96" height="40" fill="#FA3C3C"/>
+  <rect width="600" height="400" filter="url(#grain)" opacity="0.55"/>
+</svg>

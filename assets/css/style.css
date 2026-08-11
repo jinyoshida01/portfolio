@@ -1,0 +1,1732 @@
+/* ==========================================================================
+   Portfolio — dark editorial
+   assets/css/style.css
+
+   Contents
+   01  Fonts
+   02  Design tokens
+   03  Reset & base
+   04  Typography
+   05  Layout primitives
+   06  Reveal / animation primitives
+   07  Grain, cursor, preloader
+   08  Navigation
+   09  Hero
+   10  Selected work
+   11  About
+   12  Capabilities
+   13  Experience
+   14  Skills & software
+   15  Contact & footer
+   16  Case study pages
+   17  Responsive
+   18  Reduced motion, focus, print
+   ========================================================================== */
+
+/* 01 — Fonts ------------------------------------------------------------- */
+/* Sora sets every heading, Inter sets body copy — both variable, one file
+   each. Space Mono sets the small uppercase labels, nav, buttons and
+   metadata. Instrument Serif is kept only for italic accents. */
+@font-face {
+  font-family: 'Sora var';
+  src: url('../fonts/sora-latin-wght-normal.woff2') format('woff2-variations');
+  font-weight: 100 800; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'Instrument Serif';
+  src: url('../fonts/instrument-serif-latin-400-normal.woff2') format('woff2');
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'Instrument Serif';
+  src: url('../fonts/instrument-serif-latin-400-italic.woff2') format('woff2');
+  font-weight: 400; font-style: italic; font-display: swap;
+}
+@font-face {
+  font-family: 'Inter var';
+  src: url('../fonts/inter-latin-wght-normal.woff2') format('woff2-variations');
+  font-weight: 100 900; font-style: normal; font-display: swap;
+}
+/* Space Mono is a static family — 400 and 700, no variable axis. The bold is
+   declared across 500-700 so the handful of rules asking for 500 land on a
+   real file instead of a synthesised one. */
+@font-face {
+  font-family: 'Space Mono';
+  src: url('../fonts/space-mono-latin-400-normal.woff2') format('woff2');
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'Space Mono';
+  src: url('../fonts/space-mono-latin-700-normal.woff2') format('woff2');
+  font-weight: 500 700; font-style: normal; font-display: swap;
+}
+
+/* 02 — Design tokens ----------------------------------------------------- */
+:root {
+  color-scheme: dark;
+
+  /* colour
+     --paper is the surface, --ink is what's marked on it. The names describe
+     the roles, not the values: the paper here is near-black and the ink is
+     bone. Flip these eight values and the whole site flips with them. */
+  --paper:      #08080a;
+  --paper-2:    #0e0e12;
+  --paper-3:    #16161b;
+  --paper-4:    #1e1e24;
+  --ink:        #efebe3;
+  --ink-80:     rgba(239, 235, 227, 0.80);
+  --ink-60:     rgba(239, 235, 227, 0.60);
+  /* 0.54 is the lowest this can go and still clear WCAG AA (4.5:1) for the
+     small mono labels that use it — don't lower it */
+  --ink-42:     rgba(239, 235, 227, 0.54);
+  --ink-16:     rgba(239, 235, 227, 0.16);
+  --line:       rgba(239, 235, 227, 0.13);
+  --line-soft:  rgba(239, 235, 227, 0.07);
+  --ember:      #fa3c3c;
+  --ember-soft: rgba(250, 60, 60, 0.14);
+  --go:         #7ddba4;
+
+  /* type
+     --display and --title both point at Inter Bold. They stayed as two tokens
+     so a display face can be dropped back into --display later without
+     touching the working headings underneath it — project titles, capability
+     titles, roles, tool names — which want to stay readable. */
+  --display: 'Sora var', 'Inter var', -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif;
+  --title: 'Sora var', 'Inter var', -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif;
+  --sans: 'Inter var', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  --serif: 'Instrument Serif', 'Hoefler Text', 'New York', Georgia, 'Times New Roman', serif;
+  /* Space Mono sets wider than Plex and is already loosely spaced, so the
+     tracking on the label styles below is lighter than it was. */
+  --mono: 'Space Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* Sora sets wider and looser than Inter and its bold tops out at 800, so
+     the tracking pulls in harder than Inter needed and the display size is
+     trimmed a little to hold the same measure. */
+  --display-weight: 700;
+  --display-track: -0.042em;
+  --title-weight: 700;
+  --title-track: -0.034em;
+
+  /* fluid scale — min 360px viewport, max 1600px.
+     Sans sets wider than the serif, so the top end is pulled in. */
+  --step--1: clamp(0.78rem, 0.75rem + 0.15vw, 0.86rem);
+  --step-0:  clamp(0.95rem, 0.90rem + 0.22vw, 1.06rem);
+  --step-1:  clamp(1.12rem, 1.02rem + 0.45vw, 1.38rem);
+  --step-2:  clamp(1.30rem, 1.10rem + 0.90vw, 1.90rem);
+  --step-3:  clamp(1.70rem, 1.30rem + 1.75vw, 2.80rem);
+  --step-4:  clamp(2.10rem, 1.45rem + 2.90vw, 4.00rem);
+  --step-5:  clamp(2.55rem, 1.55rem + 4.90vw, 6.00rem);
+
+  /* space */
+  /* --gutter is the page's side padding. --gap is what grids use between
+     cells; they were the same token, so tightening the page margins also
+     squeezed every grid on the site. Separate now. */
+  --gutter: clamp(0.85rem, 0.55rem + 1vw, 1.6rem);
+  --gap: clamp(1.25rem, 0.9rem + 2.2vw, 3.5rem);
+  --section-y: clamp(5rem, 3rem + 9vw, 11rem);
+  --measure: 62ch;
+
+  /* motion */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-io: cubic-bezier(0.65, 0, 0.35, 1);
+  /* no overshoot, no acceleration spike — for hovers that should feel calm */
+  --ease-soft: cubic-bezier(0.33, 0, 0.2, 1);
+  --dur: 0.75s;
+  --nav-h: 74px;
+}
+
+/* 03 — Reset & base ----------------------------------------------------- */
+*, *::before, *::after { box-sizing: border-box; }
+* { margin: 0; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  scrollbar-color: var(--paper-4) var(--paper);
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: var(--step-0);
+  font-weight: 350;
+  line-height: 1.62;
+  letter-spacing: 0.002em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* locked while the preloader runs */
+body.is-loading { overflow: hidden; height: 100vh; }
+
+img, svg, video { display: block; max-width: 100%; height: auto; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+ul, ol { list-style: none; padding: 0; }
+
+::selection { background: var(--ember); color: var(--paper); }
+
+/* 04 — Typography -------------------------------------------------------- */
+.display {
+  font-family: var(--display);
+  font-weight: var(--display-weight);
+  line-height: 1.04;
+  letter-spacing: var(--display-track);
+  text-wrap: balance;
+}
+/* the serif italic is a deliberate contrast against the bold sans, not a
+   fallback — Inter's own italic disappears next to a 700 roman at this size */
+.display em {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+h1 { font-size: var(--step-5); }
+h2 { font-size: var(--step-4); }
+h3 { font-size: var(--step-2); }
+h4 { font-size: var(--step-1); }
+/* Bare headings default to the working face. Anything that should carry the
+   condensed caps takes .display as well — which every page title and section
+   heading in the markup does. */
+h1, h2, h3, h4 {
+  font-family: var(--title);
+  font-weight: var(--title-weight);
+  line-height: 1.04;
+  letter-spacing: var(--title-track);
+}
+
+.eyebrow {
+  font-family: var(--mono);
+  font-size: var(--step--1);
+  font-weight: 500;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--ink-42);
+  display: flex;
+  align-items: center;
+  gap: 0.85em;
+}
+.eyebrow::before {
+  content: '';
+  width: 1.9em; height: 1px;
+  background: var(--ember);
+  flex: none;
+}
+.eyebrow.no-rule::before { display: none; }
+
+.lede {
+  font-size: var(--step-1);
+  line-height: 1.5;
+  color: var(--ink-80);
+  max-width: 46ch;
+  font-weight: 320;
+}
+
+.prose { max-width: var(--measure); color: var(--ink-60); }
+.prose > * + * { margin-top: 1.15em; }
+.prose strong { color: var(--ink); font-weight: 500; }
+.prose em { font-family: var(--serif); font-size: 1.12em; font-style: italic; color: var(--ink-80); }
+
+.mono { font-family: var(--mono); font-size: var(--step--1); letter-spacing: 0.06em; }
+.num  { font-family: var(--mono); font-size: var(--step--1); color: var(--ink-42); letter-spacing: 0.1em; }
+.accent { color: var(--ember); }
+
+/* 05 — Layout primitives ------------------------------------------------ */
+/* No max-width. Every page runs to the same edges as the hero name — the
+   gutter and nothing else — so the site has one left edge and one right edge
+   all the way down. Line length is held by --measure on .prose and by the
+   ch-based caps on headings, which is where reading comfort actually belongs;
+   a container cap would only have made the margins disagree with the hero. */
+.shell {
+  width: 100%;
+  padding-inline: var(--gutter);
+}
+.section { padding-block: var(--section-y); position: relative; }
+.section--tight { padding-block: calc(var(--section-y) * 0.6); }
+.rule { height: 1px; background: var(--line); border: 0; }
+
+.grid { display: grid; gap: var(--gap); grid-template-columns: repeat(12, 1fr); }
+
+/* Label on top, heading directly beneath it and hard against the same left
+   edge as everything below. The heading used to sit in a second column on the
+   right, which read as two unrelated blocks and left a dead rail down the
+   page. */
+.section-head {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: clamp(0.9rem, 2vw, 1.4rem);
+  padding-bottom: clamp(2.5rem, 5vw, 4.5rem);
+}
+.section-head__title { font-size: var(--step-4); max-width: 20ch; line-height: 1.0; }
+
+/* buttons ---------------------------------------------------------------- */
+.btn {
+  --pad: 1rem 1.6rem;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7em;
+  padding: var(--pad);
+  font-family: var(--mono);
+  font-size: var(--step--1);
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid var(--ink-16);
+  border-radius: 999px;
+  /* Hover is a straight cross-fade of colour — nothing slides, nothing moves.
+     The long duration and flat easing are what make it read as calm. */
+  transition:
+    background-color 0.5s var(--ease-soft),
+    border-color 0.5s var(--ease-soft),
+    color 0.5s var(--ease-soft);
+}
+.btn:hover,
+.btn:focus-visible {
+  background: var(--ink);
+  color: var(--paper);
+  border-color: var(--ink);
+}
+
+.btn--solid { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+/* ink-on-red, not bone-on-red: bone on the accent is only 2.9:1 */
+.btn--solid:hover,
+.btn--solid:focus-visible { background: var(--ember); color: var(--paper); border-color: var(--ember); }
+
+/* the arrow holds still too — it just picks up the new text colour */
+.btn__arrow { transition: color 0.5s var(--ease-soft); }
+
+/* animated underline link ----------------------------------------------- */
+.link {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 2px;
+}
+.link::after {
+  content: '';
+  position: absolute;
+  left: 0; bottom: 0;
+  width: 100%; height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s var(--ease);
+}
+.link:hover::after, .link:focus-visible::after { transform: scaleX(1); }
+.link--on::after { transform: scaleX(1); transform-origin: right; }
+.link--on:hover::after { transform: scaleX(0); }
+
+/* 06 — Reveal / animation primitives ------------------------------------ */
+/* line-masked text: JS wraps children of [data-split] in .ln > .ln__i */
+/* The masked-line reveal clips to this box, so the box has to reach below the
+   baseline far enough to clear a descender — Inter's 'g' drops about 0.21em.
+   The negative margin pulls the extra space back out so the line rhythm is
+   unchanged; only the clip region grows. */
+.ln { display: block; overflow: hidden; padding-bottom: 0.24em; margin-bottom: -0.20em; }
+.ln__i {
+  display: block;
+  transform: translateY(110%) rotate(1.5deg);
+  opacity: 0;
+  transition:
+    transform 1.05s var(--ease),
+    opacity 0.9s var(--ease);
+  transition-delay: var(--d, 0ms);
+  will-change: transform;
+}
+.is-in .ln__i, .ln.is-in .ln__i { transform: none; opacity: 1; }
+
+/* generic fade-rise */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.9s var(--ease), transform 1s var(--ease);
+  transition-delay: var(--d, 0ms);
+}
+[data-reveal].is-in { opacity: 1; transform: none; }
+
+/* curtain wipe for media */
+[data-clip] { clip-path: inset(0 0 100% 0); transition: clip-path 1.15s var(--ease); transition-delay: var(--d, 0ms); }
+[data-clip].is-in { clip-path: inset(0 0 0 0); }
+
+/* scaling image inside a clipped frame */
+[data-clip] > img, [data-clip] > .frame__media {
+  transform: scale(1.14);
+  transition: transform 1.4s var(--ease);
+  transition-delay: var(--d, 0ms);
+}
+[data-clip].is-in > img, [data-clip].is-in > .frame__media { transform: scale(1); }
+
+/* hairline that draws itself */
+[data-draw] { transform: scaleX(0); transform-origin: left; transition: transform 1.1s var(--ease); transition-delay: var(--d, 0ms); }
+[data-draw].is-in { transform: scaleX(1); }
+
+/* ── Lenis (smooth scroll) ────────────────────────────────────────────────
+   Vendored from lenis.css rather than loaded separately — it's 500 bytes
+   and one fewer request. Only applies once main.js adds the .lenis class,
+   so with JavaScript off the page scrolls normally with no side effects. */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis:not(.lenis-autoToggle).lenis-stopped {
+  overflow: clip;
+}
+
+.lenis [data-lenis-prevent],
+.lenis [data-lenis-prevent-wheel],
+.lenis [data-lenis-prevent-touch],
+.lenis [data-lenis-prevent-vertical],
+.lenis [data-lenis-prevent-horizontal] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
+.lenis.lenis-autoToggle {
+  transition-property: overflow;
+  transition-duration: 1ms;
+  transition-behavior: allow-discrete;
+}
+
+/* 07 — Grain, cursor, preloader ----------------------------------------- */
+/* -14% gives the drift animation room to move without making the layer four
+   times the size of the viewport, which is what -50% was costing */
+.grain {
+  position: fixed;
+  inset: -14%;
+  z-index: 9000;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation: grainShift 6s steps(6) infinite;
+}
+@keyframes grainShift {
+  0%   { transform: translate(0, 0); }
+  20%  { transform: translate(-3%, 4%); }
+  40%  { transform: translate(2%, -3%); }
+  60%  { transform: translate(-2%, -2%); }
+  80%  { transform: translate(3%, 2%); }
+  100% { transform: translate(0, 0); }
+}
+
+/* custom cursor (pointer devices only, added by JS) */
+.cursor, .cursor-dot {
+  position: fixed;
+  top: 0; left: 0;
+  z-index: 9500;
+  pointer-events: none;
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.3s linear, width 0.4s var(--ease), height 0.4s var(--ease), background-color 0.4s var(--ease);
+}
+.cursor {
+  width: 34px; height: 34px;
+  border: 1px solid var(--ink-42);
+  margin: -17px 0 0 -17px;
+}
+.cursor-dot {
+  width: 5px; height: 5px;
+  background: var(--ember);
+  margin: -2.5px 0 0 -2.5px;
+}
+.cursor.is-on, .cursor-dot.is-on { opacity: 1; }
+.cursor.is-hot { width: 66px; height: 66px; margin: -33px 0 0 -33px; background: var(--ember-soft); border-color: var(--ember); }
+
+/* preloader */
+.loader {
+  position: fixed;
+  inset: 0;
+  z-index: 9800;
+  background: var(--paper);
+  display: grid;
+  place-items: center;
+  transition: opacity 0.6s var(--ease);
+}
+.loader__inner { width: min(420px, 76vw); text-align: center; }
+.loader__word { overflow: hidden; padding-block: 0.24em; margin-block: -0.24em; }
+/* the same lockup as the header brand and the hero name */
+.loader__word span {
+  display: block;
+  font-family: var(--display);
+  font-weight: var(--display-weight);
+  font-size: var(--step-2);
+  letter-spacing: -0.045em;
+  text-transform: uppercase;
+  animation: lnUp 0.9s var(--ease) both;
+}
+@keyframes lnUp { from { transform: translateY(110%); } to { transform: none; } }
+.loader__bar { margin-top: 1.1rem; height: 1px; background: var(--ink-16); position: relative; }
+.loader__bar i { position: absolute; inset: 0; background: var(--ember); transform-origin: left; transform: scaleX(0); }
+.loader__meta {
+  display: flex; justify-content: space-between;
+  margin-top: 0.7rem;
+  font-family: var(--mono); font-size: var(--step--1);
+  color: var(--ink-42); letter-spacing: 0.14em;
+}
+.loader.is-done { opacity: 0; pointer-events: none; }
+
+/* 08 — Navigation ------------------------------------------------------- */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 800;
+  height: var(--nav-h);
+  display: flex;
+  align-items: center;
+  transition: transform 0.55s var(--ease), background-color 0.4s linear, border-color 0.4s linear, backdrop-filter 0.4s linear;
+  border-bottom: 1px solid transparent;
+}
+.nav.is-stuck {
+  background: rgba(8, 8, 10, 0.72);
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  border-bottom-color: var(--line-soft);
+}
+.nav.is-hidden { transform: translateY(-100%); }
+/* The mark is centred on the page, so the two side columns have to be able to
+   grow equally — flex: 1 1 0 on both, rather than letting their content
+   decide. Without that the mark drifts by half the difference between the
+   clock's width and the links'. */
+.nav__row { display: flex; align-items: center; width: 100%; gap: 1rem; }
+.nav__clock {
+  flex: 1 1 0; min-width: 0;
+  font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--ink-42);
+  display: flex; gap: 0.9em; white-space: nowrap;
+}
+/* tabular figures stop the clock jittering as the seconds tick over */
+.nav__clock [data-clock] { font-variant-numeric: tabular-nums; }
+.nav__end { flex: 1 1 0; justify-content: flex-end; }
+
+/* The same lockup as the hero name, at the same proportions — the tracking
+   matches the wordmark's rather than opening up the way small caps usually
+   want to. That's the point: it should read as the same mark, shrunk. */
+.brand {
+  display: inline-flex; align-items: baseline;
+  flex: 0 0 auto;
+  font-family: var(--display);
+  font-weight: var(--display-weight);
+  font-size: var(--step-1);
+  letter-spacing: -0.045em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+/* links and the button are one group hard against the right edge, so the row
+   reads brand | ......... | links + button rather than three loose thirds */
+.nav__end { display: flex; align-items: center; gap: clamp(1.4rem, 3vw, 2.8rem); }
+.nav__links { display: flex; align-items: center; gap: clamp(1.2rem, 2.4vw, 2.6rem); }
+.nav__links a {
+  font-family: var(--mono);
+  font-size: var(--step--1);
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--ink-60);
+  transition: color 0.3s linear;
+  position: relative;
+}
+.nav__links a:hover, .nav__links a:focus-visible, .nav__links a[aria-current='page'] { color: var(--ink); }
+.nav__links a[aria-current='page']::before {
+  content: ''; position: absolute; left: -0.75em; top: 50%;
+  width: 4px; height: 4px; border-radius: 50%; background: var(--ember); transform: translateY(-50%);
+}
+.nav__cta { display: none; }
+
+/* burger */
+.burger { display: none; width: 44px; height: 44px; position: relative; z-index: 2; margin-right: -10px; }
+.burger i {
+  position: absolute; left: 11px; width: 22px; height: 1.5px; background: var(--ink);
+  transition: transform 0.45s var(--ease), opacity 0.3s linear;
+}
+.burger i:nth-child(1) { top: 18px; }
+.burger i:nth-child(2) { top: 25px; }
+.burger.is-open i:nth-child(1) { transform: translateY(3.5px) rotate(45deg); }
+.burger.is-open i:nth-child(2) { transform: translateY(-3.5px) rotate(-45deg); }
+
+/* mobile sheet */
+.sheet {
+  position: fixed;
+  inset: 0;
+  z-index: 700;
+  background: var(--paper-2);
+  padding: calc(var(--nav-h) + 2rem) var(--gutter) 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  clip-path: inset(0 0 100% 0);
+  transition: clip-path 0.7s var(--ease);
+  visibility: hidden;
+}
+.sheet.is-open { clip-path: inset(0 0 0 0); visibility: visible; }
+.sheet__links { display: flex; flex-direction: column; gap: 0.2rem; }
+.sheet__links a {
+  font-family: var(--display);
+  font-weight: var(--display-weight);
+  font-size: var(--step-3);
+  letter-spacing: var(--display-track);
+  padding-block: 0.35rem;
+  border-bottom: 1px solid var(--line-soft);
+  display: flex; justify-content: space-between; align-items: baseline;
+  opacity: 0; transform: translateY(20px);
+  transition: opacity 0.6s var(--ease), transform 0.6s var(--ease);
+}
+.sheet.is-open .sheet__links a { opacity: 1; transform: none; }
+.sheet__links a:nth-child(1) { transition-delay: 0.14s; }
+.sheet__links a:nth-child(2) { transition-delay: 0.20s; }
+.sheet__links a:nth-child(3) { transition-delay: 0.26s; }
+.sheet__links a:nth-child(4) { transition-delay: 0.32s; }
+.sheet__links a:nth-child(5) { transition-delay: 0.38s; }
+.sheet__links a:nth-child(6) { transition-delay: 0.44s; }
+.sheet__foot { display: flex; flex-wrap: wrap; gap: 0.4rem 1.4rem; color: var(--ink-42); }
+
+/* 09 — Hero -------------------------------------------------------------- */
+.hero {
+  min-height: 100svh;
+  padding-top: calc(var(--nav-h) + clamp(2rem, 6vh, 5rem));
+  padding-bottom: clamp(2rem, 5vh, 4rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  /* deliberately NOT overflow:hidden — the backdrop below has to bleed past
+     the section edge. .hero__bg does the horizontal clipping instead. */
+}
+
+/* Backdrop: gradient auras + the interactive dot field. It runs 34vh past the
+   bottom of the hero and fades out with a mask, so the glow dissolves into the
+   next section instead of stopping at a hard edge. */
+.hero__bg {
+  position: absolute;
+  inset: 0 0 -26vh 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+.hero__aura-wrap { position: absolute; inset: 0; }
+
+/* The glow has to dissolve into the next section rather than stopping at a
+   line. This used to be a mask on the wrapper, which meant the browser
+   re-masked the full viewport-width area on every frame of the auras' 18s
+   drift — 28ms a frame, far more than anything else on the page. Because the
+   page behind is a flat colour, a gradient to that colour laid over the top
+   is visually identical and composites once. */
+.hero__bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(to bottom,
+    transparent 0%, transparent 52%,
+    rgba(8, 8, 10, 0.45) 78%,
+    var(--paper) 100%);
+}
+/* One aura, not two. The red one was removed — on a page whose only colour is
+   a red accent, a red wash behind everything made the accent feel like part of
+   the background instead of a mark on it. */
+.hero__aura {
+  position: absolute;
+  width: 70vmax; height: 70vmax;
+  bottom: -30vmax; left: -30vmax;
+  border-radius: 50%;
+  background: radial-gradient(circle at center, rgba(91, 107, 168, 0.13), transparent 66%);
+  animation: drift 24s var(--ease-io) infinite alternate;
+}
+@keyframes drift {
+  from { transform: translate3d(0, 0, 0) scale(1); }
+  to   { transform: translate3d(-5%, 4%, 0) scale(1.1); }
+}
+/* The hero's backdrop is gradient only. */
+
+/* per-character entrance + magnetic hover (see splitChars in main.js) */
+/* one of these per word, so a headline breaks between words and not between
+   letters — the .chw below are inline-blocks and would otherwise break anywhere */
+.chwd { display: inline-block; white-space: nowrap; }
+.chw {
+  display: inline-block;
+  overflow: hidden;
+  /* same reasoning as .ln above — clip below the baseline, then take the
+     space back so the headline doesn't gain a gap under it */
+  /* This box clips, so it has to clear the glyphs on every side, and each
+     side is paid straight back with a negative margin so nothing moves.
+     Bottom for descenders; top because a tight line-height puts the box edge
+     inside the round capitals, which overshoot the cap height — that's why O
+     and S shaved flat while J and N looked fine; sides because at negative
+     tracking a glyph's ink overhangs its advance width. */
+  padding-bottom: 0.24em;
+  margin-bottom: -0.20em;
+  padding-top: 0.30em;
+  margin-top: -0.30em;
+  padding-inline: 0.06em;
+  margin-inline: -0.06em;
+  vertical-align: bottom;
+  transition: transform 0.55s var(--ease);
+}
+.ch {
+  display: inline-block;
+  transform: translateY(112%);
+  transition: transform 0.95s var(--ease);
+  transition-delay: var(--d, 0ms);
+}
+.is-in .ch { transform: none; }
+
+.rotator {
+  display: inline-block;
+  color: var(--ink);
+  transition: transform 0.36s var(--ease-io), opacity 0.36s linear, filter 0.36s linear;
+}
+.rotator.is-out { transform: translateY(-0.42em); opacity: 0; filter: blur(7px); }
+.rotator.is-under { transform: translateY(0.42em); opacity: 0; filter: blur(7px); transition: none; }
+.hero__avail { display: inline-flex; align-items: center; gap: 1em; font-family: var(--mono); font-size: var(--step--1); letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-60); }
+/* A pulsing green dot beside "commissions closed" would be saying two
+   opposite things at once, so the dot is quiet by default: no colour, no
+   pulse, just a marker. Add .is-open to the line when you're taking work and
+   it comes back to life. */
+.hero__avail i { width: 7px; height: 7px; border-radius: 50%; background: var(--ink-42); flex: none; }
+.hero__avail.is-open i { background: var(--go); box-shadow: 0 0 0 0 rgba(125, 219, 164, 0.6); animation: ping 2.4s var(--ease-io) infinite; }
+@keyframes ping {
+  0%   { box-shadow: 0 0 0 0 rgba(125, 219, 164, 0.55); }
+  70%  { box-shadow: 0 0 0 9px rgba(125, 219, 164, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(125, 219, 164, 0); }
+}
+/* 09b — Hero stage ------------------------------------------------------- */
+/* A fixed-height stage with everything placed against its edges: readouts in
+   the corners, the portrait floating in the middle, the name across the
+   bottom. Absolute positioning rather than a grid, because the pieces are
+   pinned to the frame rather than sharing a rhythm with each other. */
+.hero--stage {
+  min-height: 100svh;
+  padding-block: 0;
+  display: block;
+  /* One number, three users: the band's top edge, the pitch that aligns to it
+     and the availability line that sits just above it. They were separate
+     copies of the same calc, which is how they drift apart. */
+  --band-top: calc(var(--nav-h) + clamp(5rem, 13vh, 8.5rem));
+  /* the name and the rail are positioned against the section rather than the
+     shell, so their edges don't depend on the shell's padding box */
+  position: relative;
+}
+.hero__stage {
+  position: relative;
+  height: 100svh;
+  min-height: 560px;
+  padding-top: calc(var(--nav-h) + clamp(1rem, 3vh, 2.4rem));
+  padding-bottom: clamp(2.6rem, 5vh, 4rem);
+}
+
+/* top left ---------------------------------------------------------------- */
+/* Positioned rather than in flow, so its first line sits exactly on the band's
+   top edge instead of near it. The inset is written against the page edge,
+   the same way the availability line and the bottom rail are — these all
+   resolve against the section, so they carry their own gutter. */
+.hero__intro {
+  position: absolute;
+  left: var(--gutter);
+  top: var(--band-top);
+  max-width: 34ch;
+  z-index: 3;
+}
+.hero__where {
+  margin-top: 0.9rem;
+  font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--ink-42);
+  display: flex; gap: 0.9em;
+}
+/* tabular figures stop the clock jittering as the seconds tick over */
+.hero__clock { font-variant-numeric: tabular-nums; }
+/* The signature sits under the pitch, in the left column. Inlined SVG rather
+   than an <img>, so it takes the page's colour — see signature() in build.py. */
+.sig {
+  display: block;
+  width: clamp(148px, 15vw, 205px);
+  margin-top: clamp(1.2rem, 2.6vh, 1.8rem);
+  color: var(--ink-80);
+}
+.sig svg { display: block; width: 100%; height: auto; }
+/* A photographed signature is dark ink on white paper. Inverting it makes the
+   ink light and the paper dark, and screen blending then drops that dark paper
+   into the background — screen can only lighten, so black contributes nothing.
+   A phone photo becomes a clean mark with no editing at all.
+
+   The page colour has to be painted on .sig itself for that to work. The hero's
+   intro block is positioned with a z-index, which makes it a stacking context,
+   and mix-blend-mode only sees backdrops inside its own context — so without
+   this the image would blend against nothing and the paper would stay visible
+   as a faint rectangle. */
+.sig { background: var(--paper); }
+/* No signature file, no gap: with nothing between the tags this collapses to
+   nothing rather than leaving a coloured block in the layout. */
+.sig:empty { display: none; }
+.sig__raster {
+  display: block; width: 100%; height: auto;
+  filter: invert(1) contrast(2.1);
+  mix-blend-mode: screen;
+}
+/* a PNG that already has a transparent background needs none of that */
+.sig__raster--alpha { filter: none; mix-blend-mode: normal; }
+@media (max-width: 860px) { .sig { width: min(46vw, 210px); } }
+
+.hero__pitch {
+  margin-top: 0;
+  font-size: var(--step-0); line-height: 1.5; color: var(--ink-60);
+}
+
+/* top right --------------------------------------------------------------- */
+/* Sits just above the band's top edge rather than up under the nav — the two
+   read as a pair that way. The offset is the band's own top expression minus
+   this line's height and a gap, so the two move together. */
+.hero--stage .hero__avail {
+  position: absolute;
+  top: calc(var(--band-top) - 2.4rem);
+  right: var(--gutter);
+  z-index: 3;
+}
+
+
+/* Centre: a wide band. It starts near the middle of the page and runs clean
+   off the right edge — past the gutter, out to the viewport — so the picture
+   reads as a slice of something larger rather than a framed object.
+
+   It's positioned against the section rather than the shell, which is why
+   right: 0 lands on the page edge instead of the gutter. Insetting it from
+   inside the shell would mean a negative offset that has to track --gutter,
+   and that only stays correct until someone changes the padding. */
+/* The band wipes open from its right edge, so it reads as arriving from off
+   the page rather than fading up in place. clip-path rather than width,
+   because the picture inside must not resize as it opens — only be revealed. */
+@keyframes bandOpen {
+  from { clip-path: inset(0 0 0 100%); }
+  to   { clip-path: inset(0 0 0 0); }
+}
+.hero__object {
+  position: absolute;
+  left: 41%;
+  right: 0;
+  clip-path: inset(0 0 0 100%);
+  animation: bandOpen 1.15s var(--ease) 0.35s forwards;
+  /* No aspect-ratio. The band is bounded top and bottom instead, so its height
+     is simply whatever the layout leaves between the intro above and the name
+     below — which means it can never grow into the name, at any viewport
+     shape. --mark-h is published by setupFitMark() in main.js, because the
+     name's height comes out of a measurement and isn't knowable in CSS; the
+     fallback keeps this sane before the script runs. */
+  top: var(--band-top);
+  bottom: calc(var(--mark-h, 210px) + clamp(2rem, 3.7vh, 3.2rem) + clamp(0.9rem, 2.2vh, 1.8rem));
+  min-height: 150px;
+  overflow: hidden;
+  background: var(--paper-3);
+  z-index: 1;
+}
+/* the picture fills the band and crops to it — the band's shape is set by the
+   page, so the image has to give */
+.hero__portrait {
+  display: block; width: 100%; height: 100%; object-fit: cover;
+}
+
+
+/* the rotating discipline, on the wordmark's left shoulder. In flow above the
+   name rather than positioned against the bottom — the wordmark's leading
+   changes with the viewport, so any fixed offset eventually collides with it. */
+/* The gaps above and below the name are set by eye, not by matching numbers.
+   The label's box hugs its own small type, while the name's line box is
+   shorter than its glyphs and carries descender space underneath — so equal
+   CSS values land visibly unequal. These two are tuned against the rendered
+   ink: about 20px of daylight on each side at desktop. */
+.hero__disc {
+  padding-bottom: 1.72em;
+  font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--ink-42);
+}
+.hero__disc .rotator { color: var(--ink-60); }
+
+/* the name */
+/* This used to be overflow: hidden, from when the name was sized to bleed past
+   both edges. A tight line-height means the glyphs stand taller than their own
+   line box, so that same clip was shaving the tops off the round capitals.
+   Clipping only sideways keeps a long name from ever pushing out a horizontal
+   scrollbar while leaving the letters whole. */
+.hero__markwrap {
+  position: absolute;
+  left: 0; right: 0;
+  bottom: clamp(2rem, 3.7vh, 3.2rem);
+  padding-inline: var(--gutter);
+  overflow-x: clip;
+  overflow-y: visible;
+  z-index: 2;
+  pointer-events: none;
+}
+.hero__mark {
+  /* setupFitMark() in main.js measures this and sets an exact font-size, so
+     the name spans the padded width precisely at any viewport. The vw value
+     here is the no-JS fallback and is deliberately a shade small — better a
+     little short than overflowing. */
+  font-size: 12.2vw;
+  line-height: 0.8;
+  letter-spacing: -0.045em;
+  text-transform: uppercase;
+  text-align: center;
+  white-space: nowrap;
+  /* Optical centring. Two things push the ink right of the layout box: the
+     negative tracking is applied after the last character as well, so the box
+     under-runs the ink on that side, and the J carries a much larger left side
+     bearing than the A does on the right. Measured at about 0.033em across
+     every viewport, so it's a constant in em and scales with the fit. */
+  transform: translateX(-0.033em);
+}
+
+/* bottom rail ------------------------------------------------------------- */
+.hero__rail {
+  position: absolute;
+  left: var(--gutter); right: var(--gutter);
+  bottom: clamp(0.9rem, 2vh, 1.5rem);
+  display: flex; justify-content: space-between; align-items: baseline;
+  font-size: 0.66rem; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--ink-42);
+  z-index: 3;
+}
+.hero__rail [data-viewport] { font-variant-numeric: tabular-nums; }
+/* the cue travels downward, since that's the direction it's asking for */
+.hero__scroll { position: relative; padding-left: 1.5em; }
+.hero__scroll::before {
+  content: ''; position: absolute; left: 0.35em; top: -0.5em;
+  width: 1px; height: 1.9em;
+  background: linear-gradient(to bottom, transparent, var(--ember));
+  animation: raildrop 2.4s var(--ease-io) infinite;
+}
+@keyframes raildrop {
+  0%       { transform: translateY(-55%); opacity: 0; }
+  35%, 65% { transform: translateY(0);    opacity: 1; }
+  100%     { transform: translateY(55%);  opacity: 0; }
+}
+
+/* 11a — Alternating rows (the work archive) ------------------------------*/
+/* Named .workrow, not .band: the About page already has a .band — its wide
+   image under the intro — and calling these the same thing gave that figure
+   this two-column grid and split it down the middle. */
+/* One project per row, picture and words trading sides down the page. Each
+   band is a single link wrapping both halves, so a screen reader announces
+   each project once rather than twice. */
+.workrows { display: grid; }
+.workrow {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: clamp(1.5rem, 4vw, 4.5rem);
+  align-items: center;
+  padding-block: clamp(1.8rem, 4vw, 3.4rem);
+  border-top: 1px solid var(--line);
+}
+.workrows .workrow:last-child { border-bottom: 1px solid var(--line); }
+/* direction flips the column order without touching the source order, so the
+   markup stays in reading order for anything that ignores CSS */
+.workrow:nth-child(even) { direction: rtl; }
+.workrow:nth-child(even) > * { direction: ltr; }
+
+.workrow__img { aspect-ratio: 16 / 10; }
+.workrow__n {
+  font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.14em;
+  color: var(--ink); display: block;
+}
+.workrow__n i { font-style: normal; color: var(--ink-42); }
+.workrow__t {
+  font-family: var(--display); font-weight: var(--display-weight);
+  font-size: clamp(1.6rem, 1rem + 2.2vw, 3rem);
+  letter-spacing: var(--display-track); line-height: 1.02;
+  margin: 0.8rem 0 0; text-wrap: balance;
+  transition: color 0.4s linear;
+}
+.workrow:hover .workrow__t, .workrow:focus-visible .workrow__t { color: var(--ember); }
+.workrow__m {
+  font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--ink-42); margin: 0.9rem 0 0;
+}
+.workrow__s {
+  color: var(--ink-60); font-size: var(--step-0); line-height: 1.55;
+  max-width: 46ch; margin: 1rem 0 0;
+}
+.workrow__go {
+  display: inline-block; margin-top: 1.4rem;
+  font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--ink-42);
+  transition: color 0.4s linear, transform 0.5s var(--ease);
+}
+.workrow:hover .workrow__go { color: var(--ink); transform: translateX(6px); }
+
+@media (max-width: 860px) {
+  .workrow { grid-template-columns: 1fr; gap: 1.2rem; direction: ltr !important; }
+  .workrow:nth-child(even) > * { direction: ltr; }
+  .workrow__img { aspect-ratio: 4 / 3; }
+  .workrow__s { display: none; }
+}
+
+/* 11b — Horizontal rail ---------------------------------------------------*/
+/* The work is a single row that slides sideways as you scroll past it.
+
+   No scroll hijacking: the section is simply made taller than the screen, the
+   row inside is `position: sticky`, and its horizontal offset is read from how
+   far you've scrolled through that extra height. The browser keeps doing the
+   scrolling; the script only maps one axis onto the other. That's what keeps
+   the scrollbar honest, keyboard navigation working and Lenis's easing intact.
+
+   Below 860px, and under reduced motion, none of this applies — the rail
+   becomes the ordinary vertical stack it always was. A pinned sideways scroll
+   on a phone hides how much work there is and fights the platform. */
+.rail__meta {
+  display: flex; align-items: center; gap: 1.1rem;
+  margin-top: clamp(1.6rem, 3vw, 2.4rem);
+  font-family: var(--mono); font-size: 0.68rem;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-42);
+}
+.rail__count b { color: var(--ink); font-weight: 400; font-variant-numeric: tabular-nums; }
+.rail__line { flex: 1 1 auto; max-width: 320px; height: 1px; background: var(--ink-16); position: relative; }
+.rail__line i {
+  position: absolute; inset: 0; background: var(--ember);
+  transform: scaleX(0); transform-origin: left;
+}
+.rail__hint { margin-left: auto; }
+
+@media (min-width: 861px) {
+  .rail { position: relative; }
+  .rail__pin {
+    position: sticky; top: 0;
+    height: 100svh;
+    display: flex; align-items: center;
+    overflow: hidden;
+  }
+  .rail__track {
+    display: flex;
+    gap: clamp(1.5rem, 3vw, 3.2rem);
+    padding-inline: var(--gutter);
+    will-change: transform;
+  }
+  .rail__track > .work__item {
+    flex: 0 0 clamp(300px, 30vw, 460px);
+    margin-top: 0 !important;
+  }
+  /* aligned, not stepped — the row reads as one band of work */
+  .rail__track { align-items: start; }
+  .rail__track .frame { aspect-ratio: 4 / 5; }
+  /* In a 30vw card the title and its tags can't share a line — the title wraps
+     to three words and the tags get squeezed into a column beside it. Stacked,
+     both read straight. */
+  .rail__track .card__foot { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+  .rail__track .card__meta { align-items: flex-start; text-align: left; }
+  .rail__track .card__title { font-size: var(--step-1); }
+}
+
+/* 11 — Selected work ---------------------------------------------------- */
+.work { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(2rem, 4vw, 4.5rem) var(--gap); }
+.work__item:nth-child(4n + 1),
+.work__item:nth-child(4n + 4) { margin-top: 0; }
+.work__item:nth-child(4n + 2),
+.work__item:nth-child(4n + 3) { margin-top: clamp(0rem, 6vw, 5.5rem); }
+
+.card { display: block; position: relative; }
+.frame {
+  position: relative;
+  overflow: hidden;
+  background: var(--paper-3);
+  border: 1px solid var(--line-soft);
+  aspect-ratio: 4 / 3;
+}
+.frame__media {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 1.1s var(--ease), filter 0.8s var(--ease);
+  filter: saturate(0.88) contrast(1.02);
+}
+.card:hover .frame__media, .card:focus-visible .frame__media { transform: scale(1.045); filter: saturate(1.05) contrast(1.05); }
+
+.frame__veil {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(8,8,10,0.86) 0%, rgba(8,8,10,0.18) 44%, transparent 74%);
+  opacity: 0;
+  transition: opacity 0.6s var(--ease);
+}
+.card:hover .frame__veil, .card:focus-visible .frame__veil { opacity: 1; }
+
+.frame__cta {
+  position: absolute;
+  bottom: 1.4rem; left: 1.4rem; right: 1.4rem;
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  transform: translateY(14px);
+  opacity: 0;
+  transition: transform 0.6s var(--ease), opacity 0.5s var(--ease);
+  font-family: var(--mono); font-size: var(--step--1); letter-spacing: 0.12em; text-transform: uppercase;
+}
+.card:hover .frame__cta, .card:focus-visible .frame__cta { transform: none; opacity: 1; }
+.frame__cta b { font-weight: 500; }
+.frame__cta span { display: inline-flex; align-items: center; gap: 0.5em; color: var(--ember); }
+
+.frame__badge {
+  position: absolute; top: 1rem; left: 1rem;
+  padding: 0.4rem 0.7rem;
+  font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.14em; text-transform: uppercase;
+  background: rgba(8,8,10,0.6);
+  backdrop-filter: blur(6px);
+  border: 1px solid var(--ink-16);
+  border-radius: 999px;
+  color: var(--ink-80);
+}
+
+.card__foot {
+  display: flex; align-items: baseline; justify-content: space-between; gap: 1rem;
+  padding-top: 1.1rem;
+  border-top: 1px solid var(--line);
+  margin-top: 1.1rem;
+}
+.card__title { font-family: var(--title); font-weight: var(--title-weight); font-size: var(--step-2); line-height: 1.14; letter-spacing: var(--title-track); transition: color 0.4s linear; }
+.card:hover .card__title { color: var(--ember); }
+/* flex: none here would let a long tag string ("3D rendering · Plugin
+   development") push the whole card wider than its column — it has to be able
+   to shrink and wrap instead */
+.card__meta {
+  display: flex; flex-direction: column; align-items: flex-end; gap: 0.4rem;
+  font-family: var(--mono); text-align: right;
+  flex: 0 1 auto; min-width: 0;
+}
+/* the disciplines: uppercase and tracked, so they read as a label set */
+.card__tags {
+  font-size: 0.66rem; letter-spacing: 0.13em; text-transform: uppercase;
+  color: var(--ink-42); text-wrap: balance;
+}
+/* the year is a different kind of fact, so it gets a different voice —
+   bolder, tighter, no tracking, and it brightens with the card on hover */
+.card__year {
+  font-size: var(--step--1); font-weight: 700; letter-spacing: 0.02em;
+  color: var(--ink-60);
+  transition: color 0.4s linear;
+}
+.card:hover .card__year { color: var(--ink); }
+
+/* the archive link under the highlights grid */
+.work__more {
+  display: flex; justify-content: flex-end;
+  padding-top: clamp(2rem, 4vw, 3.2rem);
+  font-family: var(--mono); font-size: var(--step--1);
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--ink-60);
+}
+.work__more a:hover { color: var(--ink); }
+
+/* 12 — About ------------------------------------------------------------- */
+/* 12b — About page: intro, image band ------------------------------------ */
+/* The page header and the background section used to be two stacked blocks,
+   each with its own eyebrow + heading. One opening block reads faster and
+   saves a screen of empty space. */
+.about-page .section { padding-block: clamp(3rem, 1.6rem + 5vw, 6.2rem); }
+.about-page .section-head { padding-bottom: clamp(2rem, 4vw, 3.4rem); }
+
+.intro {
+  padding-top: calc(var(--nav-h) + clamp(3rem, 8vh, 6rem));
+  padding-bottom: clamp(3rem, 5vw, 5rem);
+}
+/* same rule as the section heads: label, then heading, then the statement,
+   all stacked hard against the left edge */
+.intro__head {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: clamp(0.8rem, 2vw, 1.4rem);
+  padding-bottom: clamp(2.4rem, 5vw, 4rem);
+}
+.intro__title { font-size: var(--step-5); line-height: 0.96; margin-top: clamp(0.8rem, 2vw, 1.4rem); }
+.intro__say {
+  font-family: var(--title); font-weight: var(--title-weight);
+  font-size: var(--step-3); letter-spacing: var(--title-track);
+  line-height: 1.1; max-width: 26ch; color: var(--ink-80);
+}
+
+/* full-bleed image break — sits outside .shell so it runs edge to edge */
+.band { margin: 0; }
+.band__frame { aspect-ratio: 21 / 9; }
+
+.about { display: grid; grid-template-columns: minmax(0, 0.62fr) minmax(0, 1fr); gap: clamp(2rem, 5vw, 6rem); align-items: start; }
+.about__media { position: relative; max-width: 480px; }
+.about__media .frame { aspect-ratio: 4 / 5; }
+.about__caption {
+  position: absolute; bottom: -1px; left: -1px;
+  padding: 0.8rem 1rem;
+  background: var(--paper);
+  border-top: 1px solid var(--line); border-right: 1px solid var(--line);
+  font-family: var(--mono); font-size: var(--step--1); color: var(--ink-42); letter-spacing: 0.1em; text-transform: uppercase;
+}
+.about__body > * + * { margin-top: clamp(1.5rem, 3vw, 2.4rem); }
+.prose--lead > p:first-child { font-size: var(--step-1); line-height: 1.45; color: var(--ink-80); }
+
+/* 12c — Video ------------------------------------------------------------ */
+/* Three shapes: a gallery cell that happens to hold a clip, a standalone
+   player, and a third-party embed. */
+/* A still sets its own height from the picture; a video has none to give, so
+   every video plate needs an explicit box or it collapses to nothing. The
+   16:9 here is only a fallback — build.py reads each film's real dimensions
+   out of its header and writes them on as an inline aspect-ratio, and main.js
+   corrects that from the browser's own metadata once the file is open. */
+.plate--vid { background: var(--paper-2); aspect-ratio: 16 / 9; }
+/* contain, not cover. A still can be cropped because the page chose its box;
+   nobody chose the shape of a film, and trimming one loses picture. With the
+   ratio coming from the file itself there is normally nothing to letterbox at
+   all — this is what makes a mismatch show as a thin bar rather than as a
+   missing top and bottom. */
+.plate--vid video { display: block; width: 100%; height: 100%; object-fit: contain; }
+
+.vid, .embed {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: var(--paper-2);
+  border: 1px solid var(--line);
+}
+.vid video, .embed iframe {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  display: block; border: 0;
+  object-fit: contain;
+}
+
+/* Nothing here styles the player itself any more, and that is deliberate.
+   There used to be a background on ::-webkit-media-controls-enclosure to pull
+   the controls towards the palette. The enclosure is not the control bar —
+   it is the full-size box the controls live inside, so that background sat
+   over the whole picture at 72% black and stayed there through playback.
+   Measured: a frame that should read (233,229,248) came out (72,72,78).
+   The control bar is ::-webkit-media-controls-panel if it ever needs
+   touching, but the native players already draw their own scrim. */
+
+/* 13 — Capabilities ----------------------------------------------------- */
+/* Eight cards rather than eight rows.
+   As a full-width list this section had a structural problem no amount of
+   tightening fixed: a short title and a two-sentence paragraph can't fill
+   1400px, so every row carried a hole in the middle, and the gap grew with the
+   viewport. Cards turn that surplus width into a second column of content
+   instead of empty space, and the measure stays readable at any size.
+   The tile column went with it. All eight images were placeholders, and a
+   capability doesn't need a picture to be legible — this reads as type and
+   rules now, which is what the rest of the site is made of.
+
+   Counts that divide 8 exactly: 1, 2, 4. Anything else leaves a short final
+   row, which with bordered cards looks like a missing item rather than a
+   deliberate edge. */
+.caps {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--gap);
+}
+@media (min-width: 620px) {
+  .caps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (min-width: 1680px) {
+  .caps { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+
+.cap {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  padding: clamp(1.15rem, 1.7vw, 1.6rem);
+  background: var(--paper-2);
+  border: 1px solid var(--line);
+  overflow: hidden;
+  transition: border-color 0.45s linear, background-color 0.5s var(--ease-soft);
+}
+.cap:hover { border-color: var(--ink-16); background: var(--paper-3); }
+
+/* The ember wipe survives from the list version, turned to rise from the
+   bottom: across a card that wide it read as a stripe, but climbing it reads
+   as the card lighting up. */
+.cap::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, var(--ember-soft), transparent 65%);
+  transform: translateY(100%);
+  transition: transform 0.7s var(--ease);
+  pointer-events: none;
+}
+.cap:hover::before { transform: none; }
+
+/* A hairline that draws itself along the top edge on hover — the same gesture
+   as .step::before further down, so the two sections feel related. */
+.cap::after {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: var(--ember);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 0.75s var(--ease);
+}
+.cap:hover::after { transform: scaleX(1); }
+
+.cap > * { position: relative; }        /* above the wipe */
+
+.cap__n {
+  font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.16em;
+  color: var(--ink-42); transition: color 0.4s linear;
+}
+.cap:hover .cap__n { color: var(--ember); }
+
+.cap__t {
+  font-family: var(--title); font-weight: var(--title-weight);
+  font-size: var(--step-1); line-height: 1.14; letter-spacing: var(--title-track);
+  /* the tallest of the eight titles wraps to two lines; reserving both keeps
+     the paragraphs on a shared baseline across a row instead of stepping */
+  min-height: 2.28em;
+}
+.cap__d {
+  color: var(--ink-60); font-size: var(--step--1); line-height: 1.55;
+  /* push the chips to the bottom edge so they line up across a row whatever
+     the paragraph length */
+  display: flex; flex-direction: column; flex: 1;
+}
+.cap__d > p { margin-bottom: 0.9rem; }
+.cap__k { list-style: none; display: flex; flex-wrap: wrap; gap: 0.3rem 0.4rem; margin-top: auto; }
+.cap__k li {
+  font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 0.22rem 0.5rem; border: 1px solid var(--line); border-radius: 999px; color: var(--ink-42);
+  transition: border-color 0.4s linear, color 0.4s linear;
+}
+.cap:hover .cap__k li { border-color: var(--ink-16); color: var(--ink-60); }
+
+/* process timeline ------------------------------------------------------- */
+.steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: var(--gap); }
+.step { position: relative; padding-top: 1.6rem; border-top: 1px solid var(--line); }
+.step::before {
+  content: ''; position: absolute; top: -1px; left: 0; width: 100%; height: 1px; background: var(--ember);
+  transform: scaleX(0); transform-origin: left; transition: transform 0.9s var(--ease); transition-delay: var(--d, 0ms);
+}
+.step.is-in::before { transform: scaleX(1); }
+.step h4 { font-size: var(--step-1); margin-bottom: 0.5rem; }
+.step p { color: var(--ink-60); font-size: var(--step-0); }
+.step__n { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.16em; color: var(--ember); display: block; margin-bottom: 0.9rem; }
+
+/* 13b — Experience (compact employment history) -------------------------- */
+.section-head--compact { padding-bottom: clamp(1.8rem, 3vw, 2.8rem); }
+.section-head--compact .section-head__title { font-size: var(--step-3); }
+
+.roles { border-top: 1px solid var(--line); }
+.role {
+  position: relative;
+  display: grid;
+  /* the role column is capped so the company sits next to it rather than
+     drifting off to the middle of a wide screen */
+  grid-template-columns: 8.5rem minmax(0, 19rem) minmax(0, 1fr) auto;
+  gap: clamp(0.7rem, 2.2vw, 2.5rem);
+  align-items: baseline;
+  padding-block: clamp(1.05rem, 1.6vw, 1.4rem);
+  border-bottom: 1px solid var(--line);
+  overflow: hidden;
+}
+.role::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(90deg, var(--ember-soft), transparent 65%);
+  transform: translateX(-100%);
+  transition: transform 0.7s var(--ease);
+  pointer-events: none;
+}
+.role:hover::before { transform: none; }
+
+.role__yr {
+  font-family: var(--mono); font-size: var(--step--1); letter-spacing: 0.06em;
+  color: var(--ink-42); white-space: nowrap;
+}
+.role__t {
+  font-family: var(--title); font-weight: var(--title-weight); font-size: var(--step-1);
+  letter-spacing: -0.024em; line-height: 1.2;
+  transition: transform 0.6s var(--ease);
+}
+.role:hover .role__t { transform: translateX(6px); }
+.role__c { color: var(--ink-60); font-size: var(--step-0); }
+.role__d {
+  justify-self: end; text-align: right;
+  font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--ink-42); white-space: nowrap;
+}
+
+/* the current role */
+.role--now .role__yr { color: var(--ember); }
+.role--now .role__t::after {
+  content: ''; display: inline-block;
+  width: 6px; height: 6px; margin-left: 0.6em;
+  border-radius: 50%; background: #7ddba4;
+  vertical-align: 0.12em;
+  animation: ping 2.4s var(--ease-io) infinite;
+}
+
+.roles__note {
+  display: flex; flex-wrap: wrap; gap: 0.5rem 2rem; justify-content: space-between;
+  padding-top: 1.4rem;
+  font-family: var(--mono); font-size: var(--step--1); letter-spacing: 0.04em;
+  color: var(--ink-42);
+}
+.roles__note strong { color: var(--ink-80); font-weight: 500; }
+
+/* 14 — Skills & software ------------------------------------------------- */
+/* The clusters run as a wide band across the top and the tool grid sits full
+   width beneath, rather than a narrow column beside a tall one — that pairing
+   left a dead rail down the page whenever the two columns were unequal. */
+.skillsets {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1.6rem, 3vw, 3.4rem);
+  padding-bottom: clamp(2.2rem, 4vw, 3.6rem);
+  align-items: start;
+}
+.skillsets .skillset + .skillset { margin-top: 0; }
+
+/* skill clusters */
+.skillset + .skillset { margin-top: clamp(1.8rem, 3vw, 2.6rem); }
+.skillset h3 {
+  font-size: var(--step-1);
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 1rem;
+  display: flex; justify-content: space-between; align-items: baseline; gap: 1rem;
+}
+.skillset h3 span { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.14em; color: var(--ink-42); font-weight: 400; }
+.skillset ul { display: flex; flex-wrap: wrap; gap: 0.4rem 0.45rem; }
+.skillset li {
+  font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 0.42rem 0.7rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--ink-60);
+  transition: color 0.35s linear, border-color 0.35s linear, background-color 0.35s linear;
+}
+.skillset li:hover { color: var(--ink); border-color: rgba(250, 60, 60, 0.5); background: var(--ember-soft); }
+
+/* the software grid */
+/* Borders live on the tiles, not as gaps over a coloured background — that way
+   a partial last row leaves clean space instead of a grey block. */
+.tools {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(168px, 1fr));
+  border-top: 1px solid var(--line);
+  border-left: 1px solid var(--line);
+}
+.tool {
+  position: relative;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background: var(--paper);
+  padding: clamp(0.9rem, 1.6vw, 1.15rem);
+  display: flex; flex-direction: column; gap: 0.65rem;
+  transition: background-color 0.4s linear;
+}
+.tool:hover { background: var(--paper-3); }
+
+/* Function glyphs, not brand logos — one drawing system, no trademarks. They sit
+   on their own line above the name and warm to the accent with the tile. */
+.tool__i {
+  display: block;
+  width: 22px; height: 22px;
+  color: var(--ink-42);
+  transition: color 0.5s var(--ease-soft);
+}
+.tool__i svg { display: block; width: 100%; height: 100%; }
+.tool:hover .tool__i { color: var(--ember); }
+
+/* the tile grid is dense — 700 across sixteen names in two rows is a wall */
+.tool__n { font-family: var(--title); font-weight: 600; font-size: var(--step-0); letter-spacing: -0.018em; }
+/* margin-top:auto pins the label to the bottom so it lines up across a row,
+   whatever the length of the tool name above it */
+.tool__m {
+  margin-top: auto; padding-top: 0.2rem;
+  font-family: var(--mono); font-size: 0.64rem; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--ink-42);
+}
+
+
+/* 15 — Contact & footer ------------------------------------------------- */
+/* the closing note is short — a full section's worth of padding under it just
+   reads as a hole above the footer */
+.cta { position: relative; overflow: hidden; padding-bottom: calc(var(--section-y) * 0.62); }
+.cta__title { font-size: var(--step-5); max-width: 20ch; }
+.cta__row { display: flex; flex-wrap: wrap; gap: 1rem 1.4rem; align-items: center; padding-top: clamp(2rem, 4vw, 3rem); }
+.cta__mail { font-family: var(--title); font-weight: 500; font-size: var(--step-2); letter-spacing: -0.024em; }
+
+.footer { border-top: 1px solid var(--line); padding-block: clamp(2rem, 4vw, 3.5rem) clamp(1.5rem, 3vw, 2.5rem); }
+/* 230px, not 190: the email address is the widest thing in here and can't be
+   hyphenated, so the columns have to drop to two before it runs past the page
+   edge. overflow-wrap is the backstop if a longer address ever goes in. */
+.footer__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: var(--gap); }
+.footer__grid a { overflow-wrap: anywhere; }
+.footer h3 { font-family: var(--mono); font-size: 0.68rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-42); margin-bottom: 1rem; }
+.footer li + li { margin-top: 0.5rem; }
+.footer a { color: var(--ink-80); transition: color 0.3s linear; }
+.footer a:hover { color: var(--ember); }
+.footer__base {
+  display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; justify-content: space-between;
+  margin-top: clamp(2.5rem, 5vw, 4rem); padding-top: 1.4rem; border-top: 1px solid var(--line-soft);
+  font-family: var(--mono); font-size: var(--step--1); color: var(--ink-42); letter-spacing: 0.06em;
+}
+.to-top { display: inline-flex; align-items: center; gap: 0.5em; }
+.to-top:hover { color: var(--ink); }
+
+/* 15 — Case study pages ------------------------------------------------- */
+.progress { position: fixed; top: 0; left: 0; right: 0; height: 2px; z-index: 850; background: transparent; }
+.progress i { display: block; height: 100%; width: 100%; background: var(--ember); transform: scaleX(0); transform-origin: left; }
+
+.case-hero { padding-top: calc(var(--nav-h) + clamp(3rem, 8vh, 6rem)); padding-bottom: clamp(2rem, 5vw, 4rem); }
+.case-hero__title { font-size: var(--step-5); max-width: 18ch; line-height: 0.96; }
+.case-hero__sub { display: flex; flex-wrap: wrap; gap: 0.6rem 1.2rem; align-items: center; padding-bottom: 1.6rem; }
+.chip {
+  font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase;
+  padding: 0.35rem 0.7rem; border: 1px solid var(--line); border-radius: 999px; color: var(--ink-60);
+}
+.chip--accent { border-color: rgba(250, 60, 60, 0.45); color: var(--ember); }
+
+/* Gallery cells take their height from the picture in them. Every <img> the
+   build writes carries its real pixel width and height, so the browser knows
+   the shape before the file arrives and reserves exactly the right space —
+   nothing is cropped and nothing jumps as it loads. Drop in a panorama, a
+   square or a portrait and each simply is what it is. */
+.plate { overflow: hidden; background: var(--paper-3); border: 1px solid var(--line-soft); }
+.plate img { display: block; width: 100%; height: auto; }
+
+/* Wide pictures earn the full width of the grid; the rest sit in one column.
+   build.py decides which by measuring the file. */
+.plate--full { grid-column: 1 / -1; }
+
+/* The project hero is the one place a shape is imposed: it gets the real
+   ratio inline, but a very tall cover would otherwise push the whole page
+   down, so it's capped and cropped from the centre past that point. */
+/* .bleed and .shell are now the same thing — page width, gutter padding.
+   Kept as its own name because the project hero is conceptually a spread and
+   would be the first thing to break out again if .shell ever regains a cap. */
+.bleed { width: 100%; padding-inline: var(--gutter); }
+/* width: 100% is doing real work here. With only an aspect-ratio and a
+   max-height, the box shrinks its *width* to satisfy the ratio and the hero
+   stops reaching the page edges. Pinning the width makes the cap crop the
+   picture instead, which is what a bounded full-width hero should do. */
+.plate--hero { width: 100%; max-height: 88svh; }
+.plate--hero img.cover { width: 100%; height: 100%; object-fit: cover; }
+/* There is deliberately no .plate--hero.plate--vid rule here. There used to be
+   one forcing 16:9, which meant a clip in the hero slot was cropped to that
+   shape whatever it actually was. A hero clip now keeps the inline ratio
+   build.py read out of the file, so an ultrawide film or a vertical one gets
+   its own height. The 88svh cap above still applies, but object-fit: contain
+   in section 12c means reaching it letterboxes rather than crops — the whole
+   frame is on screen either way. */
+
+.case-body { display: grid; grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.28fr); gap: clamp(2rem, 5vw, 6rem); align-items: start; }
+.case-aside { position: sticky; top: calc(var(--nav-h) + 2rem); display: grid; gap: 1.6rem; }
+.case-aside dl { display: grid; gap: 1.2rem; }
+.case-aside dt { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-42); }
+.case-aside dd { margin: 0.35rem 0 0; color: var(--ink-80); }
+
+.case-block + .case-block { margin-top: clamp(2.5rem, 5vw, 4.5rem); }
+/* body headings inside a case study are read, not looked at */
+.case-block h2, .case-block h3 {
+  font-family: var(--title); font-weight: var(--title-weight);
+  font-size: var(--step-2); letter-spacing: var(--title-track);
+  line-height: 1.14; text-transform: none; margin-bottom: 1.1rem;
+}
+.pull {
+  font-family: var(--title); font-weight: 500; font-size: var(--step-3); line-height: 1.16;
+  letter-spacing: -0.028em;
+  padding-left: clamp(1rem, 3vw, 2rem); border-left: 2px solid var(--ember);
+  color: var(--ink); margin-block: clamp(2rem, 4vw, 3rem);
+  max-width: 28ch;
+}
+.pull cite { display: block; margin-top: 1.1rem; font: 500 var(--step--1)/1.4 var(--mono); font-style: normal; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-42); }
+
+.results { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+.results > div { background: var(--paper); padding: clamp(1.2rem, 2.5vw, 1.9rem); }
+.results b { font-family: var(--title); font-size: var(--step-3); font-weight: 500; letter-spacing: -0.03em; display: block; line-height: 1; color: var(--ember); }
+/* direct child only — the counter <span> lives inside <b> and must stay inline */
+.results > div > span { display: block; margin-top: 0.7rem; font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-42); }
+
+/* align-items: start, or a short cell stretches to match a tall neighbour and
+   the picture inside it gets pulled out of shape */
+.gallery { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--gap); align-items: start; }
+
+.next {
+  display: block; position: relative; overflow: hidden;
+  border-top: 1px solid var(--line);
+  padding-block: clamp(3rem, 7vw, 6rem);
+}
+.next::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 70% 120%, rgba(250, 60, 60, 0.18), transparent 60%);
+  opacity: 0; transition: opacity 0.7s var(--ease);
+}
+.next:hover::before { opacity: 1; }
+.next__row { display: flex; align-items: center; justify-content: space-between; gap: 2rem; flex-wrap: wrap; }
+.next__title { font-family: var(--display); font-weight: var(--display-weight); font-size: var(--step-4); letter-spacing: var(--display-track); line-height: 1.0; transition: transform 0.7s var(--ease); }
+.next:hover .next__title { transform: translateX(clamp(6px, 1.5vw, 20px)); }
+.next__thumb { width: clamp(90px, 12vw, 170px); aspect-ratio: 4/3; overflow: hidden; border: 1px solid var(--line); flex: none; }
+.next__thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.9s var(--ease); }
+.next:hover .next__thumb img { transform: scale(1.09); }
+
+/* 16 — Responsive ------------------------------------------------------- */
+@media (max-width: 1080px) {
+  .case-body { grid-template-columns: 1fr; }
+  .case-aside { position: static; }
+  /* drop the discipline column — years, role and company are the useful part */
+  .role { grid-template-columns: 7.5rem minmax(0, 14rem) minmax(0, 1fr); }
+  .role__d { display: none; }
+}
+
+@media (max-width: 860px) {
+  :root { --nav-h: 64px; }
+  /* The order changes here: availability, then the picture, then the pitch
+     underneath it. The availability line is the only thing left in the normal
+     flow, which is what --above-b measures; the pitch is positioned off the
+     band's bottom edge, published as --band-b by the same code. */
+  .hero--stage .hero__avail { position: static; margin-top: 0; }
+  .hero__intro {
+    left: var(--gutter); right: var(--gutter);
+    top: calc(var(--band-b, 520px) + clamp(1.3rem, 3vh, 2rem));
+    max-width: none;
+  }
+  .hero__pitch { max-width: 34ch; }
+  /* bigger here than on desktop in proportion — it's the only thing in the
+     middle of the screen, so it can carry the space */
+  /* full width on a phone: out to both viewport edges, and squarer, since a
+     16:9 slice is barely a stripe at this width */
+  /* Full width on a phone, and starting lower — the intro and the
+     availability line are in the flow above it here.
+
+     The height is still bounded below by the name, but it's capped as well:
+     without the cap a tall phone gives the band a near-square shape, and a
+     landscape photo filling that loses more than half its width to the crop.
+     The cap is in vw, not vh, so the band keeps the same landscape shape on
+     every phone instead of tracking how tall the device happens to be. */
+  .hero__object {
+    left: 0; right: 0;
+    /* measured, not guessed — see publishHeight() in main.js */
+    top: calc(var(--above-b, 300px) + clamp(1rem, 2.4vh, 1.6rem));
+    /* the pitch now sits between the picture and the name, so the picture has
+       to stop short of the name by the pitch's height and its gap too */
+    bottom: calc(var(--mark-h, 210px) + var(--pitch-h, 90px)
+                 + clamp(2rem, 3.7vh, 3.2rem) + clamp(1.3rem, 3vh, 2rem)
+                 + clamp(0.9rem, 2.2vh, 1.8rem));
+    max-height: 62vw;
+    min-height: 120px;
+  }
+  /* the same optical 20px above and below, retuned for the phone's type sizes */
+  .hero__markwrap { bottom: clamp(2.5rem, 5.4vh, 3.6rem); }
+  .hero__disc { padding-bottom: 1.5em; }
+  /* sized to the padded width, not the viewport: 100vw minus two gutters at
+     this breakpoint works out at about 13.3vw per the eleven characters */
+  .hero__mark { font-size: 12.6vw; }
+  .nav__links { display: none; }
+  /* The burger takes the right slot, so it has to balance the clock for the
+     mark to stay on the page's centre. Because that makes the button itself
+     stretch, the bars have to be pinned to its right edge — left: 11px inside
+     a 44px box put them at the *start* of the stretched column, which read as
+     the menu sitting in the middle of the header. */
+  .burger { display: block; flex: 1 1 0; margin-right: 0; }
+  .burger i { left: auto; right: 0; }
+  .nav__end { display: none; }
+  .about { grid-template-columns: 1fr; }
+  .about__media { max-width: 420px; }
+  .intro__say { max-width: 24ch; }
+  .skillsets { grid-template-columns: 1fr; }
+  .work { grid-template-columns: 1fr; }
+  /* rail off: one column, no pinning, no sideways travel */
+  .rail__pin { position: static; height: auto; overflow: visible; }
+  .rail__track { display: grid; grid-template-columns: 1fr; gap: clamp(2rem, 6vw, 3rem);
+                 padding-inline: var(--gutter); transform: none !important; }
+  .rail__meta { display: none; }
+  .work__item { margin-top: 0 !important; }
+  .gallery { grid-template-columns: 1fr; }
+  .plate--full { grid-column: auto; }
+}
+
+@media (max-width: 700px) {
+  /* 21:9 is a letterbox slit on a phone */
+  .band__frame { aspect-ratio: 3 / 2; }
+  /* stack the role rows: years on top, then role, then company */
+  .role { grid-template-columns: 1fr; gap: 0.15rem; padding-block: 1.1rem; }
+  .role__yr { order: -1; margin-bottom: 0.25rem; }
+  .roles__note { flex-direction: column; gap: 0.4rem; }
+}
+
+/* Three items don't fit across a narrow phone, and the city label is the
+   least useful of them — the time carries the same idea on its own. */
+@media (max-width: 620px) {
+  .nav__city { display: none; }
+}
+
+@media (max-width: 560px) {
+  .card__foot { flex-direction: column; gap: 0.4rem; }
+  .card__meta { align-items: flex-start; text-align: left; }
+  .footer__base { flex-direction: column; }
+  .btn { --pad: 0.9rem 1.3rem; }
+}
+
+@media (min-width: 861px) {
+  /* The header CTA is a nav item, not a page button — it sits on a thinner
+     pad, a step down in size and with the tracking pulled in, so it reads as
+     part of the row rather than a control bolted onto the end of it. */
+  .nav__cta {
+    display: inline-flex;
+    --pad: 0.62rem 1.05rem;
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    gap: 0.55em;
+  }
+  .nav__cta .btn__arrow { font-size: 0.9em; }
+  .sheet { display: none; }
+}
+
+/* Three nav links and a CTA fit comfortably at every desktop width, so the CTA
+   no longer needs to drop out. Below 861px the whole lot collapses to the
+   burger menu anyway. */
+
+/* 17 — Reduced motion, focus, print ------------------------------------ */
+:where(a, button, [tabindex]):focus-visible {
+  outline: 2px solid var(--ember);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.skip {
+  position: absolute; left: 50%; top: 0; transform: translate(-50%, -140%);
+  z-index: 9900; background: var(--ink); color: var(--paper);
+  padding: 0.7rem 1.1rem; font-family: var(--mono); font-size: var(--step--1);
+  transition: transform 0.3s var(--ease);
+}
+.skip:focus { transform: translate(-50%, 0.5rem); }
+
+.sr { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  /* the band is simply there, no wipe */
+  .hero__object { clip-path: none; animation: none; }
+  /* the rail stops being a rail — a stack can't go wrong */
+  .rail__pin { position: static; height: auto; overflow: visible; }
+  .rail__track { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+                 gap: clamp(2rem, 4vw, 4.5rem) var(--gap); transform: none !important; }
+  .rail__track > .work__item { transform: none !important; }
+  .rail__meta { display: none; }
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    transition-delay: 0ms !important;
+  }
+  [data-reveal], .ln__i, [data-clip], [data-draw], .step::before {
+    opacity: 1 !important;
+    transform: none !important;
+    clip-path: none !important;
+  }
+  .grain, .cursor, .cursor-dot { display: none; }
+}
+
+@media print {
+  .nav, .sheet, .loader, .grain, .cursor, .cursor-dot, .progress { display: none !important; }
+  body { background: #fff; color: #000; }
+  a { text-decoration: underline; }
+}

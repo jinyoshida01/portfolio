@@ -1,0 +1,36 @@
+{
+  "title": "Duress Brochures",
+  "date": "2025-06",
+  "year": "2024/25",
+  "highlight": true,
+  "badge": "Duress",
+  "short": "Publication · 3D",
+  "tags": [
+    "Publication design",
+    "3D rendering"
+  ],
+  "summary": "A range of promotional and informational brochures for Duress, focused on clear content hierarchy to guide readers through key device information.",
+  "meta": {
+    "Client": "Duress",
+    "Industry": "Safety technology",
+    "Year": "2024/25",
+    "Software": "Photoshop, Illustrator, InDesign, KeyShot, Blender",
+    "Deliverables": "A5 overview brochure, promotional and informational brochures"
+  },
+  "blocks": [
+    {
+      "label": "Overview",
+      "heading": "Hierarchy first, everything else second.",
+      "paras": [
+        "While working at Duress, I designed a range of brochures for both promotional and informational purposes, with a strong focus on content hierarchy to clearly guide the reader through key information on the devices."
+      ]
+    },
+    {
+      "label": "Overview brochure",
+      "heading": "The one that ended up everywhere.",
+      "paras": [
+        "One of the most impactful pieces was an A5 overview brochure that clearly presented our core devices and their key features. It quickly became a go-to resource for resellers and trade show presentations."
+      ]
+    }
+  ]
+}

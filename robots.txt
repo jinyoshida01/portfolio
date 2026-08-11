@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Not part of the site — starter folders, kept out of search results in case
+# they ever get uploaded by hand rather than through git.
+Disallow: /templates/
+
+Sitemap: https://www.jinyoshida.me/sitemap.xml
