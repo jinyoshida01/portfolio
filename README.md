@@ -511,9 +511,9 @@ the card rather than a gallery item.
 
 `index.html` and `about/index.html` are **hand written and yours**. The build only touches
 what sits between the `<!--BUILD:…-->` marker pairs, which is the card grid, the counts,
-the footer, the social tags, the fixed pictures and the skills block. Everything else on those pages you can
-edit freely and it will never be rewritten. Places worth editing are marked with an
-`EDIT ▸` comment.
+the footer, the social tags, the fixed pictures and the skills block. Everything else on
+those pages you can edit freely and it will never be rewritten. Places worth editing are
+marked with an `EDIT ▸` comment.
 
 `work/index.html` and every `work/<project>/index.html` are **generated from scratch every
 build**, so do not hand-edit them. To change how project pages look, edit

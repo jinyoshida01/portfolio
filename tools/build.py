@@ -991,7 +991,11 @@ def publish_files(projects):
     base = SITE_URL.rstrip("/")
     host = re.sub(r"^https?://", "", base)
 
-    write(os.path.join(ROOT, "CNAME"), host + "\n")
+    # No trailing newline. GitHub rewrites this file itself whenever the
+    # custom domain is touched in Settings, and it writes it without one.
+    # Adding one here made the two versions differ by a single invisible
+    # byte, which surfaced as a merge conflict on CNAME every time.
+    write(os.path.join(ROOT, "CNAME"), host)
 
     urls = ["", page("work/"), page("about/")] + \
            [page("work/%s/" % p["slug"]) for p in projects]
