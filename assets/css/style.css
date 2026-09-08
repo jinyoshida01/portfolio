@@ -774,6 +774,25 @@ html.lenis body {
 }
 /* a PNG that already has a transparent background needs none of that */
 .sig__raster--alpha { filter: none; mix-blend-mode: normal; }
+/* The header row collapses before the rest of the layout does.
+   With Work, About, GitHub and LinkedIn plus the button, the right-hand group
+   needs about 385px of min-content. Below roughly 1000px that is more than
+   half the row, so it stops shrinking, shoves the wordmark left and wraps the
+   button onto three lines. Rather than tighten the gaps until it technically
+   fits, the row hands over to the burger, which is what the sheet is for: it
+   carries all five links at a comfortable size. */
+@media (max-width: 999px) {
+  .nav__links { display: none; }
+  /* The burger takes the right slot, so it has to balance the clock for the
+     mark to stay on the page's centre. Because that makes the button itself
+     stretch, the bars have to be pinned to its right edge — left: 11px inside
+     a 44px box put them at the *start* of the stretched column, which read as
+     the menu sitting in the middle of the header. */
+  .burger { display: block; flex: 1 1 0; margin-right: 0; }
+  .burger i { left: auto; right: 0; }
+  .nav__end { display: none; }
+}
+
 @media (max-width: 860px) { .sig { width: min(46vw, 210px); } }
 
 .hero__pitch {
@@ -1619,15 +1638,6 @@ html.lenis body {
   /* sized to the padded width, not the viewport: 100vw minus two gutters at
      this breakpoint works out at about 13.3vw per the eleven characters */
   .hero__mark { font-size: 12.6vw; }
-  .nav__links { display: none; }
-  /* The burger takes the right slot, so it has to balance the clock for the
-     mark to stay on the page's centre. Because that makes the button itself
-     stretch, the bars have to be pinned to its right edge — left: 11px inside
-     a 44px box put them at the *start* of the stretched column, which read as
-     the menu sitting in the middle of the header. */
-  .burger { display: block; flex: 1 1 0; margin-right: 0; }
-  .burger i { left: auto; right: 0; }
-  .nav__end { display: none; }
   .about { grid-template-columns: 1fr; }
   .about__media { max-width: 420px; }
   .intro__say { max-width: 24ch; }
@@ -1665,19 +1675,32 @@ html.lenis body {
   .btn { --pad: 0.9rem 1.3rem; }
 }
 
-@media (min-width: 861px) {
-  /* The header CTA is a nav item, not a page button — it sits on a thinner
-     pad, a step down in size and with the tracking pulled in, so it reads as
-     part of the row rather than a control bolted onto the end of it. */
+/* Once the link row is showing, the sheet is redundant. Paired with the
+   burger's breakpoint above so exactly one of the two is ever available. */
+@media (min-width: 1000px) {
+  .sheet { display: none; }
+}
+
+/* The header CTA is the first thing to go when the row gets tight, and the
+   last to come back. It is a convenience rather than navigation: the contact
+   section and the footer both carry the same address, so dropping it costs a
+   visitor nothing, whereas dropping Work, About, GitHub and LinkedIn would.
+   Below this width the four links and the wordmark have the row to
+   themselves and the wordmark stays on the page's true centre. */
+@media (min-width: 1240px) {
+  /* A nav item, not a page button: a thinner pad, a step down in size and the
+     tracking pulled in, so it reads as part of the row rather than a control
+     bolted onto the end of it. nowrap because a button that breaks its label
+     across three lines is a bug in any layout, at any width. */
   .nav__cta {
     display: inline-flex;
     --pad: 0.62rem 1.05rem;
     font-size: 0.68rem;
     letter-spacing: 0.08em;
     gap: 0.55em;
+    white-space: nowrap;
   }
   .nav__cta .btn__arrow { font-size: 0.9em; }
-  .sheet { display: none; }
 }
 
 /* Three nav links and a CTA fit comfortably at every desktop width, so the CTA

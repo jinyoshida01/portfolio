@@ -1137,6 +1137,12 @@ def build():
     html = inject(html, "signature", signature())
     html = inject(html, "social", "\n" + social("") + "\n")
     html = inject(html, "home-hero", "\n      " + home_hero() + "\n    ")
+    # The skills block appears on the home page as well as the About page, and
+    # both are filled from content/about.json, so there is one source for it.
+    sets, tiles = about_content()
+    if sets is not None:
+        html = inject(html, "skillsets", "\n" + sets + "\n        ")
+        html = inject(html, "tools", "\n" + tiles + "\n        ")
     write(index_path, html)
 
     # The About page is hand-written too, but its footer comes from the same
@@ -1149,7 +1155,6 @@ def build():
         about = inject(about, "social", "\n" + social("../") + "\n")
         about = inject(about, "about-band", about_band())
         about = inject(about, "about-portrait", about_portrait())
-        sets, tiles = about_content()
         if sets is not None:
             about = inject(about, "skillsets", "\n" + sets + "\n        ")
             about = inject(about, "tools", "\n" + tiles + "\n        ")

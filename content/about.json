@@ -29,6 +29,7 @@
         "HTML & CSS",
         "UX design",
         "AI image workflows",
+        "AI videos",
         "Photography",
         "Augmented reality"
       ]
@@ -37,7 +38,7 @@
   "software": [
     {
       "name": "Photoshop",
-      "note": "Retouch & batch",
+      "note": "Graphics & retouch",
       "icon": "photoshop"
     },
     {
@@ -52,7 +53,7 @@
     },
     {
       "name": "Premiere Pro",
-      "note": "Editing",
+      "note": "Video editing",
       "icon": "premiere-pro"
     },
     {
@@ -62,7 +63,7 @@
     },
     {
       "name": "Lightroom",
-      "note": "Colour & raw",
+      "note": "Photo editing",
       "icon": "lightroom"
     },
     {
@@ -72,17 +73,17 @@
     },
     {
       "name": "Acrobat",
-      "note": "Preflight & proofs",
+      "note": "Document setup",
       "icon": "acrobat"
     },
     {
       "name": "Blender",
-      "note": "Modelling & rigging",
+      "note": "3D modelling",
       "icon": "blender"
     },
     {
       "name": "KeyShot",
-      "note": "Batch rendering",
+      "note": "3D rendering",
       "icon": "keyshot"
     },
     {
@@ -102,7 +103,7 @@
     },
     {
       "name": "WordPress",
-      "note": "Site build & upkeep",
+      "note": "Web design",
       "icon": "wordpress"
     },
     {
@@ -112,17 +113,17 @@
     },
     {
       "name": "Figma",
-      "note": "UI & handoff",
+      "note": "UX & graphics",
       "icon": "figma"
     },
     {
       "name": "Claude",
-      "note": "Writing & code",
+      "note": "AI code & setup",
       "icon": "claude"
     },
     {
       "name": "Cursor",
-      "note": "Build & edit",
+      "note": "AI code",
       "icon": "cursor"
     }
   ]
