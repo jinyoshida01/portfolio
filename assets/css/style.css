@@ -1597,6 +1597,22 @@ html.lenis body {
 }
 
 
+/* Compact mobile skills retain every label and the original software vectors. */
+@media (max-width: 700px) {
+  #skills .tools { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  #skills .tool { min-width: 0; padding: .75rem .6rem; gap: .4rem; }
+  #skills .tool__i { width: 20px; height: 20px; }
+  #skills .tool__n { font-size: .8125rem; line-height: 1.3; overflow-wrap: anywhere; }
+  #skills .tool__m { font-size: .625rem; line-height: 1.4; letter-spacing: .025em; padding-top: .1rem; }
+  #skills .skillsets { gap: 1.25rem; padding-bottom: 1.75rem; }
+  #skills .skillset h3 { font-size: 1rem; padding-bottom: .5rem; margin-bottom: .65rem; }
+  #skills .skillset ul { gap: .35rem; }
+  #skills .skillset li { font-size: .6875rem; letter-spacing: .025em; padding: .3rem .55rem; }
+}
+@media (max-width: 359px) {
+  #skills .tools { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
 /* 15 — Contact & footer ------------------------------------------------- */
 /* the closing note is short — a full section's worth of padding under it just
    reads as a hole above the footer */

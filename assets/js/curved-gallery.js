@@ -81,18 +81,20 @@ async function enhanceGallery(track) {
       const img = item.querySelector('img');
       const texture = await loader.loadAsync(img.currentSrc || img.src);
       texture.colorSpace = THREE.SRGBColorSpace;
-      const uniforms = {center: {value: 0}, viewport: {value: 1}, velocity: {value: 0}};
+      const uniforms = {center: {value: 0}, viewport: {value: 1}, velocity: {value: 0}, curve: {value: .22}, shear: {value: .35}};
       const material = new THREE.MeshBasicMaterial({map: texture});
       material.onBeforeCompile = shader => {
         shader.uniforms.ribbonCenter = uniforms.center;
         shader.uniforms.ribbonViewport = uniforms.viewport;
         shader.uniforms.ribbonVelocity = uniforms.velocity;
-        shader.vertexShader = 'uniform float ribbonCenter; uniform float ribbonViewport; uniform float ribbonVelocity;\n' + shader.vertexShader;
+        shader.uniforms.ribbonCurve = uniforms.curve;
+        shader.uniforms.ribbonShear = uniforms.shear;
+        shader.vertexShader = 'uniform float ribbonCenter; uniform float ribbonViewport; uniform float ribbonVelocity; uniform float ribbonCurve; uniform float ribbonShear;\n' + shader.vertexShader;
         shader.vertexShader = shader.vertexShader.replace('#include <begin_vertex>', `
           vec3 transformed = vec3(position);
           float across = clamp((position.x + ribbonCenter - ribbonViewport * 0.5) / (ribbonViewport * 0.5), -1.5, 1.5);
-          transformed.y *= 1.0 + 0.22 * across * across;
-          transformed.x += sin(uv.y * 3.14159265) * ribbonVelocity * 0.35;
+          transformed.y *= 1.0 + ribbonCurve * across * across;
+          transformed.x += sin(uv.y * 3.14159265) * ribbonVelocity * ribbonShear;
         `);
       };
       const mesh = new THREE.Mesh(new THREE.PlaneGeometry(1, 1, 32, 8), material);
@@ -112,11 +114,14 @@ async function enhanceGallery(track) {
     }
     const resize = () => {
       const width = track.clientWidth;
+      const compact = matchMedia('(max-width: 700px)').matches;
       const height = items[0].querySelector('.frame').clientHeight;
       renderer.setSize(width, height, false);
       camera.right = width; camera.top = height; camera.updateProjectionMatrix();
       for (const entry of meshes) {
-        const w = entry.element.clientWidth, h = height * 0.76;
+        const w = entry.element.clientWidth, h = height * (compact ? .92 : .76);
+        entry.uniforms.curve.value = compact ? .035 : .22;
+        entry.uniforms.shear.value = compact ? .06 : .35;
         entry.mesh.geometry.dispose();
         entry.mesh.geometry = new THREE.PlaneGeometry(w, h, 32, 8);
         entry.labels.geometry = entry.mesh.geometry;

@@ -30,7 +30,7 @@
   .ribbon.is-webgl .frame__media { opacity: 1; }
   .ribbon__canvas, .ribbon__controls, .dither-cursor { display: none !important; }
 }
-@media (max-width: 620px) {
-  .ribbon { --ribbon-image-height: clamp(270px, 80vw, 420px); }
+@media (max-width: 700px) {
+  .ribbon { --ribbon-image-height: clamp(220px, 65vw, 340px); }
   .ribbon .work--ribbon > .work__item { flex-basis: 84%; }
 }
