@@ -1,0 +1,99 @@
+.about-owl-stage {
+  --owl-display-scale: 1;
+  background: transparent;
+  position: relative;
+  overflow: hidden;
+}
+.about-owl-stage .frame__media {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  filter: none;
+  transform: none;
+}
+
+/* Monument hero: the title overlays the sculpture; biography sits below. */
+.intro.intro--monument {
+  padding-top: calc(var(--nav-h) + clamp(2rem, 4vw, 4rem));
+  padding-bottom: clamp(2rem, 4vw, 4rem);
+}
+.about.about--monument {
+  position: relative;
+  isolation: isolate;
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(2rem, 4vw, 4rem);
+}
+.about--monument .intro__head {
+  grid-column: 1;
+  grid-row: 1;
+  z-index: 1;
+  padding-bottom: 0;
+  pointer-events: none;
+}
+.about--monument .intro__title {
+  font-size: clamp(5rem, 17vw, 22rem);
+  line-height: .95;
+}
+.about--monument .about__media {
+  grid-column: 1;
+  grid-row: 1;
+  width: 100%;
+  max-width: none;
+  padding-top: clamp(5rem, 8vw, 10rem);
+}
+.about--monument .about-owl-stage {
+  height: clamp(26rem, 40vw, 46rem);
+  aspect-ratio: auto;
+  border: 0;
+}
+.about--monument .about__body { grid-column: 1; grid-row: 2; }
+.about--monument .prose {
+  width: calc((100% - clamp(2rem, 5vw, 6rem)) / 2);
+  max-width: 65ch;
+  margin-inline-start: auto;
+}
+.about--monument .prose > p { margin: 0; }
+.about--monument .prose > p + p { margin-top: 1.5rem; }
+
+@media (max-width: 860px) {
+  .about--monument .intro__title { font-size: 22vw; }
+  .about--monument .about__media { padding-top: clamp(6rem, 22vw, 11rem); }
+  .about--monument .about-owl-stage {
+    width: calc(100% + 2 * var(--gutter));
+    margin-inline: calc(-1 * var(--gutter));
+    height: clamp(18rem, 82vw, 36rem);
+  }
+  .about--monument .prose { width: 100%; margin-inline-start: 0; }
+}
+.about-owl-canvas {
+  display: block;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.about-owl-stage.is-3d-ready .frame__media { visibility: hidden; }
+@media print {
+  .about-owl-canvas { display: none; }
+  .about-owl-stage.is-3d-ready .frame__media { visibility: visible; }
+}
+
+/* Let the selected desktop sculpture extend beyond its layout column. */
+@media (min-width: 861px) {
+  .about--split .about-owl-stage {
+    --owl-display-scale: 1.6;
+    overflow: visible;
+  }
+  .about--split .about-owl-stage .about-owl-canvas,
+  .about--split .about-owl-stage .frame__media {
+    inset: -30%;
+    width: 160%;
+    height: 160%;
+    max-width: none;
+  }
+  .about--split .about__body { position: relative; z-index: 1; }
+}

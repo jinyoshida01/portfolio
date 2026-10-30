@@ -1,0 +1,31 @@
+{
+  "title": "Divices",
+  "date": "2026-09",
+  "year": "2026",
+  "highlight": true,
+  "badge": "Personal",
+  "short": "3D · Web app",
+  "tags": [
+    "3D",
+    "Web application"
+  ],
+  "summary": "An interactive 3D mockup studio for turning screen designs into polished device renders, directly in the browser.",
+  "meta": {
+    "Year": "2026",
+    "Website": "<a class=\"link\" href=\"https://jinyoshida01.github.io/divices/\" target=\"_blank\" rel=\"noopener\">Open Divices ↗</a>",
+    "Built with": "React, Three.js, TypeScript and Vite"
+  },
+  "blocks": [
+    {
+      "label": "Overview",
+      "heading": "A studio for screen design.",
+      "paras": [
+        "Divices brings the process of staging, lighting and rendering device mockups into one browser workspace. I built it around a simple starting point: upload a screen design, choose a phone or tablet, and explore how it looks in three dimensions. The device library includes a generic smartphone alongside iPhone, iPad and Samsung models, with saved compositions that make it easy to get started.",
+        "The viewport makes the setup as much a part of the experience as the final image. Camera angle, perspective and depth of field can be adjusted alongside the device finish and screen reflections. A split lighting view shows the render and the light positions together, so moving a light or changing its size has an immediate, visible effect on the result.",
+        "For larger sets of artwork, scenes can be organised into folders and reused with different screens. Individual images or whole batches can be exported as transparent PNGs at up to 4096 × 4096 pixels. Scenes and artwork stay in the browser, with backup and import tools for moving a workspace between sessions or computers."
+      ]
+    }
+  ],
+  "_content_source": "Portfolio overview rewritten from the existing project README and verified application features.",
+  "_image_source": "Screenshots of the public Divices app using its green placeholder screen, including split light-position controls; Green studio thumbnail selected by the user."
+}

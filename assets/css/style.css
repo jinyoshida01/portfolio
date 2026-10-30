@@ -172,6 +172,7 @@ ul, ol { list-style: none; padding: 0; }
 
 /* 04 — Typography -------------------------------------------------------- */
 .display {
+  text-transform: uppercase;
   font-family: var(--display);
   font-weight: var(--display-weight);
   line-height: 1.04;
@@ -800,6 +801,16 @@ html.lenis body {
   font-size: var(--step-0); line-height: 1.5; color: var(--ink-60);
 }
 
+/* Keep the desktop introduction just above the name, at the right gutter. */
+@media (min-width: 861px) {
+  .hero--stage .hero__intro {
+    top: auto;
+    left: auto;
+    right: var(--gutter);
+    bottom: calc(var(--mark-h, 210px) + clamp(2rem, 3.7vh, 3.2rem) + 0.5rem);
+  }
+}
+
 /* top right --------------------------------------------------------------- */
 /* Sits just above the band's top edge rather than up under the nav — the two
    read as a pair that way. The offset is the band's own top expression minus
@@ -851,6 +862,36 @@ html.lenis body {
 .hero__portrait {
   display: block; width: 100%; height: 100%; object-fit: cover;
 }
+.hero__portrait--owl {
+  object-fit: contain;
+  padding: clamp(0.75rem, 1.5vw, 1.5rem);
+}
+.hero__object.hero__object--3d {
+  left: 50%;
+  right: auto;
+  width: min(100%, 1440px);
+  bottom: calc(var(--mark-h, 210px) * -0.4);
+  transform: translate(-50%, calc(-1 * clamp(84px, 10vh, 132px)));
+  background: transparent;
+  clip-path: none;
+  animation: none;
+  pointer-events: none;
+}
+.hero__owl-canvas {
+  display: block;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.hero__object--3d.is-3d-ready .hero__portrait--owl { visibility: hidden; }
+
+@media (min-width: 1240px) {
+  .hero__object.hero__object--3d {
+    top: calc(var(--nav-h) + 1rem);
+    bottom: calc(var(--mark-h, 210px) * -0.4);
+  }
+}
 
 
 /* the rotating discipline, on the wordmark's left shoulder. In flow above the
@@ -866,7 +907,15 @@ html.lenis body {
   font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase;
   color: var(--ink-42);
 }
-.hero__disc .rotator { color: var(--ink-60); }
+.hero__disc .rotator {
+  color: var(--ink-60);
+  background: var(--paper);
+  box-shadow: 0 0 0 0.3em var(--paper);
+}
+.hero--stage .hero__pitch {
+  background: var(--paper);
+  box-shadow: 0 0 0 0.3em var(--paper);
+}
 
 /* the name */
 /* This used to be overflow: hidden, from when the name was sized to bleed past
@@ -1049,6 +1098,26 @@ html.lenis body {
 .work__item:nth-child(4n + 2),
 .work__item:nth-child(4n + 3) { margin-top: clamp(0rem, 6vw, 5.5rem); }
 
+/* Shared regular grid for homepage highlights and the complete Work archive.
+   Generated cards flow into the next row without per-project layout settings. */
+.work.work--gallery {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+}
+.work--gallery > .work__item { min-width: 0; margin-top: 0; }
+.work--gallery .card__foot { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+.work--gallery .card__meta { align-items: flex-start; text-align: left; }
+.work--gallery .card__title { font-size: var(--step-1); }
+.work--gallery .frame { aspect-ratio: 4 / 3; }
+.work--gallery .frame__cta { flex-wrap: wrap; gap: 0.6rem; }
+.card__summary { font-size: var(--step--1); line-height: 1.6; color: var(--ink-60); }
+@media (min-width: 1100px) {
+  .work.work--gallery { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 620px) {
+  .work.work--gallery { grid-template-columns: minmax(0, 1fr); }
+}
+
 .card { display: block; position: relative; }
 .frame {
   position: relative;
@@ -1127,6 +1196,49 @@ html.lenis body {
 }
 .card:hover .card__year { color: var(--ink); }
 
+/* Compact archive rows; projects still flow directly from the project data. */
+.work.work--rows { grid-template-columns: minmax(0, 1fr); gap: 0; }
+.work--rows > .work__item { margin: 0; min-width: 0; border-top: 1px solid var(--line); }
+.work--rows > .work__item:last-child { border-bottom: 1px solid var(--line); }
+.work--rows .card {
+  display: grid; grid-template-columns: clamp(160px, 19vw, 300px) minmax(0, 1fr);
+  align-items: center; gap: clamp(1.5rem, 3vw, 3.5rem);
+  padding: 1.25rem 3.5rem 1.25rem 0;
+}
+.work--rows .card::after {
+  content: '→'; position: absolute; right: 0.4rem; top: 50%;
+  color: var(--ember); font-size: 1.8rem; transform: translateY(-50%);
+  transition: transform 0.4s var(--ease);
+}
+.work--rows .card:hover::after { transform: translate(4px, -50%); }
+.work--rows .frame { aspect-ratio: 16 / 9; }
+.work--rows .frame__badge { top: 0.5rem; left: 0.5rem; font-size: 0.55rem; padding: 0.25rem 0.45rem; }
+.work--rows .frame__cta { bottom: 0.6rem; left: 0.6rem; right: 0.6rem; font-size: 0.6rem; }
+.work--rows .frame__cta b { display: none; }
+.work--rows .card__foot {
+  display: grid; grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.65rem 2rem; padding: 0; margin: 0; border: 0;
+}
+.work--rows .card__title { grid-column: 1; font-size: var(--step-1); }
+.work--rows .card__meta { display: contents; text-align: left; }
+.work--rows .card__tags { grid-column: 1; text-wrap: wrap; }
+.work--rows .card__year { grid-column: 2; grid-row: 1 / span 3; align-self: center; white-space: nowrap; font-weight: 400; }
+.work--rows .card__summary { grid-column: 1; max-width: 66ch; }
+.work-page .case-hero { padding-bottom: 0; }
+@media (max-width: 700px) {
+  .work--rows .card { grid-template-columns: 100px minmax(0, 1fr); gap: 1rem; padding: 1.25rem 0; align-items: start; }
+  .work--rows .frame { aspect-ratio: 1; }
+  .work--rows .frame__badge { position: static; display: none; }
+  .work--rows .card__foot { grid-template-columns: minmax(0, 1fr); gap: 0.6rem; }
+  .work--rows .card__title { font-size: 1rem; line-height: 1.35; }
+  .work--rows .card__tags { font-size: 0.6rem; letter-spacing: 0.06em; }
+  .work--rows .card__year { grid-column: 1; grid-row: 3; }
+  .work--rows .card__summary { grid-row: 4; font-size: 0.8rem; }
+  .work--rows .card::after { top: 1.1rem; right: 0; font-size: 1.2rem; transform: none; }
+  .work--rows .card:hover::after { transform: translateX(2px); }
+  .work--rows .card__title { padding-right: 1.25rem; }
+}
+
 /* the archive link under the highlights grid */
 .work__more {
   display: flex; justify-content: flex-end;
@@ -1181,6 +1293,27 @@ html.lenis body {
 }
 .about__body > * + * { margin-top: clamp(1.5rem, 3vw, 2.4rem); }
 .prose--lead > p:first-child { font-size: var(--step-1); line-height: 1.45; color: var(--ink-80); }
+
+/* Portrait split: biography and heading share the left half of the opening. */
+.intro.intro--split { padding-top: var(--nav-h); padding-bottom: 0; }
+.about.about--split {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(2rem, 5vw, 6rem); align-items: stretch;
+  margin-right: calc(-1 * var(--gutter));
+}
+.about--split .about__body { align-self: center; padding-block: clamp(3rem, 6vw, 6rem); }
+.about--split .intro__head { padding-bottom: 0; }
+.about--split .about__media { max-width: none; min-height: min(820px, calc(100svh - var(--nav-h))); }
+.about--split .about__media .frame { height: 100%; aspect-ratio: auto; border: 0; }
+.about--split .frame__media { position: absolute; inset: 0; object-position: center 38%; }
+.about--split .about__caption { font-size: 0.6rem; line-height: 1.6; }
+@media (max-width: 860px) {
+  .about.about--split { grid-template-columns: minmax(0, 1fr); gap: 0; margin-right: 0; }
+  .about--split .about__body { padding-block: 3rem 2.5rem; }
+  .about--split .about__media { max-width: none; min-height: 0; }
+  .about--split .about__media .frame { aspect-ratio: 4 / 5; height: auto; max-height: 80svh; }
+  .about--split .frame__media { position: static; }
+}
 
 /* 12c — Video ------------------------------------------------------------ */
 /* Three shapes: a gallery cell that happens to hold a clip, a standalone
@@ -1328,7 +1461,7 @@ html.lenis body {
 
 /* 13b — Experience (compact employment history) -------------------------- */
 .section-head--compact { padding-bottom: clamp(1.8rem, 3vw, 2.8rem); }
-.section-head--compact .section-head__title { font-size: var(--step-3); }
+
 
 .roles { border-top: 1px solid var(--line); }
 .role {
@@ -1468,7 +1601,7 @@ html.lenis body {
 /* the closing note is short — a full section's worth of padding under it just
    reads as a hole above the footer */
 .cta { position: relative; overflow: hidden; padding-bottom: calc(var(--section-y) * 0.62); }
-.cta__title { font-size: var(--step-5); max-width: 20ch; }
+.cta__title { font-size: var(--step-4); max-width: 20ch; }
 .cta__row { display: flex; flex-wrap: wrap; gap: 1rem 1.4rem; align-items: center; padding-top: clamp(2rem, 4vw, 3rem); }
 .cta__mail { font-family: var(--title); font-weight: 500; font-size: var(--step-2); letter-spacing: -0.024em; }
 
@@ -1567,6 +1700,17 @@ html.lenis body {
 /* align-items: start, or a short cell stretches to match a tall neighbour and
    the picture inside it gets pulled out of shape */
 .gallery { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--gap); align-items: start; }
+.gallery.gallery--motion-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(.6rem, 1.4vw, 1.2rem);
+}
+.gallery--after-motion { margin-top: clamp(1.5rem, 3vw, 3rem); }
+@media (max-width: 700px) {
+  .gallery.gallery--motion-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 480px) {
+  .gallery.gallery--motion-grid { grid-template-columns: 1fr; }
+}
 
 .next {
   display: block; position: relative; overflow: hidden;
@@ -1632,8 +1776,33 @@ html.lenis body {
     max-height: 62vw;
     min-height: 120px;
   }
-  /* the same optical 20px above and below, retuned for the phone's type sizes */
-  .hero__markwrap { bottom: clamp(2.5rem, 5.4vh, 3.6rem); }
+  /* Shift the owl, role/title and description together into the middle of
+     the viewport. The independent bottom rail remains pinned to the edge. */
+  .hero--stage .hero__intro {
+    top: auto;
+    bottom: calc(clamp(3.5rem, 7svh, 4.5rem) + var(--mobile-content-lift));
+  }
+  .hero__object.hero__object--3d {
+    width: min(100%, 760px);
+    height: min(108vw, 760px);
+    transform: translate(-50%, -48px);
+    top: auto;
+    bottom: calc(var(--pitch-h, 90px) + clamp(3.5rem, 7svh, 4.5rem) - var(--mark-h, 100px) * 0.55 + var(--mobile-content-lift));
+    max-height: none;
+  }
+  .hero--stage {
+    min-height: 100svh;
+    --mobile-content-lift: max(0px, calc((100dvh - min(108vw, 760px) - var(--pitch-h, 90px) - 84px) / 2));
+  }
+  .hero--stage .hero__stage {
+    height: 100svh;
+    height: 100dvh;
+    min-height: 540px;
+  }
+  .hero__markwrap {
+    bottom: calc(var(--pitch-h, 90px) + clamp(3.5rem, 7svh, 4.5rem) + 1.75rem + var(--mobile-content-lift));
+    text-align: left;
+  }
   .hero__disc { padding-bottom: 1.5em; }
   /* sized to the padded width, not the viewport: 100vw minus two gutters at
      this breakpoint works out at about 13.3vw per the eleven characters */

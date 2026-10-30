@@ -1,0 +1,106 @@
+{
+  "title": "Texture Foundry",
+  "date": "2026-10",
+  "year": "2026",
+  "highlight": true,
+  "badge": "Personal",
+  "short": "Textures · Web app",
+  "tags": [
+    "Textures",
+    "Web application"
+  ],
+  "summary": "A browser-based workspace for creating textured stills and seamless motion through layers, effects and real-time experimentation.",
+  "meta": {
+    "Year": "2026",
+    "Website": "<a class=\"link\" href=\"https://jinyoshida01.github.io/texture-foundry/\" target=\"_blank\" rel=\"noopener\">Open Texture Foundry ↗</a>",
+    "Built with": "Three.js"
+  },
+  "blocks": [
+    {
+      "label": "Overview",
+      "heading": "From layered texture to looping motion.",
+      "paras": [
+        "Texture Foundry is a creative tool for building textures and animated backgrounds in the browser. I designed it around a layered workflow: start with a preset or a base texture, then combine patterns, colour and effects to shape the image. More than 60 texture and effect layers can be mixed with blend modes, making it possible to move from subtle grain and gradients to intricate, distorted compositions.",
+        "The preview updates as each layer changes, keeping the process visual and exploratory. A keyframe timeline and easing controls extend those compositions into seamless loops of up to 30 seconds. Built-in 3D shapes and imported models can also become part of the image, bringing depth and motion into the same workspace.",
+        "Finished stacks can be saved as presets, revisited and shared through import and export. The output can be taken into other design workflows as a still image or an animation, with support for PNG, JPEG, WebP, GIF, MP4 and WebM. Everything is processed locally in the browser, so the work stays on the user’s device."
+      ]
+    }
+  ],
+  "_content_source": "Portfolio overview rewritten from the existing project README and verified application features.",
+  "_image_source": "Chrome workspace thumbnail uses Fullmetal; hero shows the editor; gallery contains nine supplied animations.",
+  "gallery_motion_columns": 3,
+  "_animation_sources": [
+    {
+      "source": "texture-640x640-20261021-114002.gif",
+      "stem": "10-loop",
+      "frames": 140,
+      "duration_ms": 7000,
+      "source_bytes": 13852970,
+      "web_bytes": 585936
+    },
+    {
+      "source": "texture-640x640-20261021-114020.gif",
+      "stem": "11-loop",
+      "frames": 140,
+      "duration_ms": 7000,
+      "source_bytes": 50169580,
+      "web_bytes": 5921547
+    },
+    {
+      "source": "texture-640x640-20261021-114050.gif",
+      "stem": "12-loop",
+      "frames": 140,
+      "duration_ms": 7000,
+      "source_bytes": 33286590,
+      "web_bytes": 7068422
+    },
+    {
+      "source": "texture-640x640-20261021-114102.gif",
+      "stem": "13-loop",
+      "frames": 140,
+      "duration_ms": 7000,
+      "source_bytes": 22693494,
+      "web_bytes": 915797
+    },
+    {
+      "source": "texture-640x640-20261021-114116.gif",
+      "stem": "14-loop",
+      "frames": 140,
+      "duration_ms": 7000,
+      "source_bytes": 40092112,
+      "web_bytes": 1027136
+    },
+    {
+      "source": "texture-640x640-20261021-114123.gif",
+      "stem": "15-loop",
+      "frames": 140,
+      "duration_ms": 7000,
+      "source_bytes": 34123952,
+      "web_bytes": 3825446
+    },
+    {
+      "source": "texture-640x640-20261021-114131.gif",
+      "stem": "16-loop",
+      "frames": 140,
+      "duration_ms": 7000,
+      "source_bytes": 1760298,
+      "web_bytes": 2424226
+    },
+    {
+      "source": "texture-640x640-20261021-114149.gif",
+      "stem": "17-loop",
+      "frames": 140,
+      "duration_ms": 7000,
+      "source_bytes": 37516008,
+      "web_bytes": 2007473
+    },
+    {
+      "source": "texture-640x640-20261021-114217.gif",
+      "stem": "18-loop",
+      "frames": 140,
+      "duration_ms": 7000,
+      "source_bytes": 50939628,
+      "web_bytes": 9133489
+    }
+  ]
+}

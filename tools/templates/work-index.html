@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Work · Jin Yoshida</title>
+<meta name="description" content="Selected projects by Jin Yoshida: publication design, 3D rendering, motion, photography and web, from Melbourne.">
+<meta name="theme-color" content="#08080a">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Work · Jin Yoshida">
+{{social}}
+<link rel="preload" href="{{root}}assets/fonts/sora-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="{{root}}assets/fonts/space-mono-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="{{root}}assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="{{root}}assets/css/style.css?v=gallery-ribbon-17">
+<noscript><style>
+  body.is-loading { overflow: auto; height: auto; }
+  .loader { display: none !important; }
+  [data-reveal], [data-stagger] > *, .ln__i, .ch { opacity: 1 !important; transform: none !important; }
+</style></noscript>
+</head>
+
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+<div class="grain" aria-hidden="true"></div>
+
+<header class="nav">
+  <div class="shell nav__row">
+    <!-- Three slots: the clock on the left, the mark in the middle, the links
+         on the right. The two outer columns share a flex basis so the mark
+         sits on the page's true centre, not the centre of what's left over. -->
+    <p class="nav__clock mono"><span class="nav__city">Melbourne, AU</span><span data-clock>--:--:--</span></p>
+
+    <a class="brand" href="{{root}}index.html" aria-label="Jin Yoshida — home">
+      Jin Yoshida
+    </a>
+    <div class="nav__end">
+      <nav class="nav__links" aria-label="Primary">
+        <a href="{{self_link}}" aria-current="page">Work</a>
+        <a href="{{root}}about/index.html">About</a>
+        <a href="https://github.com/jinyoshida01" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://au.linkedin.com/in/jinyoshida1999" target="_blank" rel="noopener">LinkedIn</a>
+      </nav>
+      <a class="btn nav__cta" href="{{root}}index.html#contact">
+        Get in touch <span class="btn__arrow" aria-hidden="true">→</span>
+      </a>
+    </div>
+    <button class="burger" aria-label="Menu" aria-expanded="false" aria-controls="sheet">
+      <i aria-hidden="true"></i><i aria-hidden="true"></i>
+    </button>
+  </div>
+</header>
+
+<div class="sheet" id="sheet" aria-hidden="true">
+  <nav class="sheet__links" aria-label="Mobile">
+    <a href="{{self_link}}">Work <span class="num">01</span></a>
+    <a href="{{root}}about/index.html">About <span class="num">02</span></a>
+    <a href="{{root}}index.html#contact">Contact <span class="num">03</span></a>
+    <a href="https://github.com/jinyoshida01" target="_blank" rel="noopener">GitHub <span class="num">04</span></a>
+    <a href="https://au.linkedin.com/in/jinyoshida1999" target="_blank" rel="noopener">LinkedIn <span class="num">05</span></a>
+  </nav>
+  <div class="sheet__foot mono">
+    <a class="link" href="mailto:jinyoshida.design@gmail.com">jinyoshida.design@gmail.com</a>
+  </div>
+</div>
+
+<main id="main" class="work-page">
+
+  <section class="case-hero">
+    <div class="shell">
+      <p class="eyebrow" style="margin-bottom:clamp(1.5rem,4vw,2.5rem)">
+        Archive <span class="num">{{total}} projects</span>
+      </p>
+
+      <h1 class="display case-hero__title" data-chars aria-label="Work.">Work<span class="accent">.</span></h1>
+
+      <p class="lede" data-reveal style="--d:360ms;max-width:54ch;padding-top:clamp(1.5rem,3vw,2.2rem)">
+        Everything worth showing, newest first: publication and print, 3D rendering,
+        motion, photography and web.
+      </p>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:clamp(3rem,6vw,5rem)">
+    <div class="shell">
+      <div class="work work--gallery">
+{{cards}}
+      </div>
+    </div>
+  </section>
+
+</main>
+
+{{footer}}
+
+<script src="{{root}}assets/js/vendor/lenis.min.js" defer></script>
+<script src="{{root}}assets/js/main.js?v=cursor-wake-18" defer></script>
+<script type="module" src="{{root}}assets/js/dither-cursor.js?v=9"></script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+        <article class="work__item">
+          <a class="card" href="{{href}}" aria-label="{{title_plain}} — {{tags_plain}}">
+            <div class="frame" data-clip>
+              <img class="frame__media" src="{{cover}}" alt="{{alt}}" width="{{cover_w}}" height="{{cover_h}}" loading="{{loading}}" decoding="async">
+              <div class="frame__veil" aria-hidden="true"></div>
+              <span class="frame__badge">{{badge}}</span>
+              <div class="frame__cta" aria-hidden="true">
+                <b>{{short}}</b>
+                <span>View project →</span>
+              </div>
+            </div>
+            <div class="card__foot">
+              <h3 class="card__title">{{title}}</h3>
+              <p class="card__meta">
+                <span class="card__tags">{{tags}}</span>
+                <span class="card__year">{{year}}</span>
+              </p>
+{{summary_block}}            </div>
+          </a>
+        </article>

@@ -25,12 +25,14 @@
 <link rel="preload" href="../assets/fonts/sora-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="../assets/fonts/space-mono-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="../assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="../assets/css/style.css">
+<link rel="stylesheet" href="../assets/css/style.css?v=gallery-ribbon-17">
 <noscript><style>
   body.is-loading { overflow: auto; height: auto; }
   .loader { display: none !important; }
   [data-reveal], [data-stagger] > *, .ln__i, .ch { opacity: 1 !important; transform: none !important; }
 </style></noscript>
+<link rel="stylesheet" href="../assets/css/about-owl.css?v=right-column-16">
+  <link rel="stylesheet" href="../assets/css/about-chapters.css?v=smooth-modules-6">
 </head>
 
 <body>
@@ -78,32 +80,20 @@
   </div>
 </div>
 
-<main id="main" class="about-page">
+<main id="main" class="about-page about-page--chapters">
 
-  <!-- intro — header and background are one section, not two stacked ones -->
-  <section class="intro" id="about">
+  <!-- Monument intro: title and owl share the hero, biography follows. -->
+  <section class="intro intro--monument" id="about">
     <div class="shell">
 
-      <div class="intro__head">
-        <div class="intro__lock">
-          <p class="eyebrow">Melbourne, Australia</p>
-          <h1 class="display intro__title" data-chars aria-label="About.">About<span class="accent">.</span></h1>
-        </div>
-      </div>
+      <div class="about about--monument">
 
-      <div class="about">
-
-        <div class="about__media" data-parallax="0.08">
-          <div class="frame" data-clip>
-            <!-- EDIT ▸ a photo of yourself, 4:5 crop. Put it in assets/img/about/
-                 named portrait.jpg and rebuild — nothing in this file needs
-                 touching, and the .jpg takes precedence over the grey
-                 portrait.svg placeholder automatically. -->
-            <!--BUILD:about-portrait--><img class="frame__media" src="../assets/img/about/portrait.jpg" alt="Jin Yoshida" width="620" height="820" loading="lazy" decoding="async"><!--/BUILD:about-portrait-->
+        <div class="intro__head">
+          <div class="intro__lock">
+            <p class="eyebrow">Melbourne, Australia</p>
+            <h1 class="display intro__title" data-chars aria-label="About.">About<span class="accent">.</span></h1>
           </div>
-          <span class="about__caption">22.12.2024 19:06 &nbsp;34°58′2″N 135°46′22″E</span>
         </div>
-
         <div class="about__body">
           <div class="prose prose--lead" data-reveal>
             <p>
@@ -123,6 +113,13 @@
               I take pride in my adaptability and confidence in approaching any task with a
               problem-solving mindset.
             </p>
+          </div>
+        </div>
+
+        <div class="about__media">
+          <div class="frame about-owl-stage" data-about-owl role="img" aria-label="Full-body owl sculpture">
+            <!-- Full-body owl remodeled for the selected banked-approach concept. -->
+            <!--BUILD:about-portrait--><img class="frame__media" src="../assets/img/about/owl-full-body-soft-low.png?v=soft-low-11" alt="Full-body owl sculpture" width="960" height="700" loading="eager" fetchpriority="high" decoding="async"><!--/BUILD:about-portrait-->
           </div>
         </div>
 
@@ -153,7 +150,7 @@
       <div class="caps" data-stagger="70">
 
         <article class="cap" data-reveal>
-          <p class="cap__n">01</p>
+          <div class="cap__top"><svg class="cap__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M15.707 21.293a1 1 0 0 1-1.414 0l-1.586-1.586a1 1 0 0 1 0-1.414l5.586-5.586a1 1 0 0 1 1.414 0l1.586 1.586a1 1 0 0 1 0 1.414z" /><path d="m18 13-1.375-6.874a1 1 0 0 0-.746-.776L3.235 2.028a1 1 0 0 0-1.207 1.207L5.35 15.879a1 1 0 0 0 .776.746L13 18" /><path d="m2.3 2.3 7.286 7.286" /><circle cx="11" cy="11" r="2" /></svg><p class="cap__n">01</p></div>
           <h3 class="cap__t">Graphic design</h3>
           <div class="cap__d">
             <p>Graphic design has been the foundation of my professional career. I began learning at age 14 and bring over four years of professional experience creating core brand collateral.</p>
@@ -162,7 +159,7 @@
         </article>
 
         <article class="cap" data-reveal>
-          <p class="cap__n">02</p>
+          <div class="cap__top"><svg class="cap__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z" /><path d="m3.3 7 8.7 5 8.7-5" /><path d="M12 22V12" /></svg><p class="cap__n">02</p></div>
           <h3 class="cap__t">3D modelling &amp; rendering</h3>
           <div class="cap__d">
             <p>I have created thousands of batch renders for product libraries and produced animations for educational and promotional videos.</p>
@@ -171,7 +168,7 @@
         </article>
 
         <article class="cap" data-reveal>
-          <p class="cap__n">03</p>
+          <div class="cap__top"><svg class="cap__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m12.296 3.464 3.02 3.956" /><path d="M20.2 6 3 11l-.9-2.4c-.3-1.1.3-2.2 1.3-2.5l13.5-4c1.1-.3 2.2.3 2.5 1.3z" /><path d="M3 11h18v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /><path d="m6.18 5.276 3.1 3.899" /></svg><p class="cap__n">03</p></div>
           <h3 class="cap__t">Motion design</h3>
           <div class="cap__d">
             <p>I’m well-versed in motion design principles and animation across both 2D and 3D formats.</p>
@@ -180,7 +177,7 @@
         </article>
 
         <article class="cap" data-reveal>
-          <p class="cap__n">04</p>
+          <div class="cap__top"><svg class="cap__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect width="18" height="18" x="3" y="3" rx="2" /><path d="M7 3v18" /><path d="M3 7.5h4" /><path d="M3 12h18" /><path d="M3 16.5h4" /><path d="M17 3v18" /><path d="M17 7.5h4" /><path d="M17 16.5h4" /></svg><p class="cap__n">04</p></div>
           <h3 class="cap__t">Video editing</h3>
           <div class="cap__d">
             <p>I’ve created a wide variety of product showcase videos across multiple formats and platforms.</p>
@@ -189,7 +186,7 @@
         </article>
 
         <article class="cap" data-reveal>
-          <p class="cap__n">05</p>
+          <div class="cap__top"><svg class="cap__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v16" /><path d="M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z" /></svg><p class="cap__n">05</p></div>
           <h3 class="cap__t">Publication design</h3>
           <div class="cap__d">
             <p>Brochures, catalogues, manuals, and business cards are essential to any business, and I’ve had hands-on experience creating all forms.</p>
@@ -198,7 +195,7 @@
         </article>
 
         <article class="cap" data-reveal>
-          <p class="cap__n">06</p>
+          <div class="cap__top"><svg class="cap__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M13.997 4a2 2 0 0 1 1.76 1.05l.486.9A2 2 0 0 0 18.003 7H20a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h1.997a2 2 0 0 0 1.759-1.048l.489-.904A2 2 0 0 1 10.004 4z" /><circle cx="12" cy="13" r="3" /></svg><p class="cap__n">06</p></div>
           <h3 class="cap__t">Photography</h3>
           <div class="cap__d">
             <p>Using my Sony A6700, I’ve captured and directed professional photography for site visits and case study content.</p>
@@ -207,7 +204,7 @@
         </article>
 
         <article class="cap" data-reveal>
-          <p class="cap__n">07</p>
+          <div class="cap__top"><svg class="cap__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect width="18" height="18" x="3" y="3" rx="2" /><path d="M3 9h18" /><path d="M9 21V9" /></svg><p class="cap__n">07</p></div>
           <h3 class="cap__t">Web design</h3>
           <div class="cap__d">
             <p>I have built and maintained websites using Webflow, Shopify, and WordPress, backed by a solid understanding of HTML and CSS.</p>
@@ -216,7 +213,7 @@
         </article>
 
         <article class="cap" data-reveal>
-          <p class="cap__n">08</p>
+          <div class="cap__top"><svg class="cap__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect width="8" height="8" x="3" y="3" rx="2" /><path d="M7 11v4a2 2 0 0 0 2 2h4" /><rect width="8" height="8" x="13" y="13" rx="2" /></svg><p class="cap__n">08</p></div>
           <h3 class="cap__t">AI image workflows</h3>
           <div class="cap__d">
             <p>I’ve built advanced workflows in ComfyUI to create realistic AI-generated images with precise control.</p>
@@ -233,47 +230,8 @@
     <div class="shell">
 
       <div class="section-head">
-        <p class="eyebrow">Skills &amp; software</p>
-        <h2 class="display section-head__title" data-split>How the work gets made.</h2>
-      </div>
-
-      <div class="skillsets" data-stagger="80">
-        <!--BUILD:skillsets-->
-        <section class="skillset" data-reveal>
-          <h3>Design <span>01</span></h3>
-          <ul>
-            <li>Graphic design</li>
-            <li>Publication design</li>
-            <li>Branding</li>
-            <li>Illustration</li>
-            <li>Layout &amp; grid</li>
-            <li>Packaging</li>
-          </ul>
-        </section>
-        <section class="skillset" data-reveal>
-          <h3>3D &amp; motion <span>02</span></h3>
-          <ul>
-            <li>3D modelling</li>
-            <li>Rendering</li>
-            <li>Batch pipelines</li>
-            <li>Motion design</li>
-            <li>Kinetic typography</li>
-            <li>Video editing</li>
-          </ul>
-        </section>
-        <section class="skillset" data-reveal>
-          <h3>Digital <span>03</span></h3>
-          <ul>
-            <li>Web design</li>
-            <li>HTML &amp; CSS</li>
-            <li>UX design</li>
-            <li>AI image workflows</li>
-            <li>AI videos</li>
-            <li>Photography</li>
-            <li>Augmented reality</li>
-          </ul>
-        </section>
-        <!--/BUILD:skillsets-->
+        <p class="eyebrow">Skills</p>
+        <h2 class="display section-head__title" data-split>SOFTWARE</h2>
       </div>
 
       <div class="tools" data-stagger="45">
@@ -656,7 +614,7 @@
 
       <div class="section-head section-head--compact">
         <p class="eyebrow">Experience</p>
-        <h2 class="display section-head__title" data-split>Where I’ve worked.</h2>
+        <h2 class="display section-head__title" data-split>EMPLOYMENT</h2>
       </div>
 
       <ol class="roles" data-stagger="70">
@@ -709,24 +667,23 @@
   <!-- contact ---------------------------------------------------------- -->
   <section class="section cta" id="contact">
     <div class="shell">
-      <p class="eyebrow">Contact</p>
-      <h2 class="display cta__title" data-split style="margin-top:1.5rem">
-        Get in touch.
-      </h2>
-
-      <div class="cta__row">
-        <a class="btn btn--solid" href="mailto:jinyoshida.design@gmail.com?subject=Project%20enquiry">
-          Contact me <span class="btn__arrow" aria-hidden="true">→</span>
-        </a>
-        <a class="cta__mail link link--on" href="mailto:jinyoshida.design@gmail.com">jinyoshida.design@gmail.com</a>
+      <div class="section-head">
+        <p class="eyebrow">Contact</p>
+        <h2 class="display section-head__title" data-split>Get in touch.</h2>
       </div>
 
-      <hr class="rule" data-draw style="margin-top:clamp(2.5rem,5vw,4rem)">
-
-      <p class="prose" data-reveal style="margin-top:2rem">
-        Print, digital, 3D or web. If you have a brief, send it through. If you don’t, a
-        paragraph about the problem is plenty to start.
-      </p>
+      <div class="chapter-contact">
+        <p class="prose" data-reveal>
+          Print, digital, 3D or web. If you have a brief, send it through. If you don’t, a
+          paragraph about the problem is plenty to start.
+        </p>
+        <div class="cta__row">
+          <a class="btn btn--solid" href="mailto:jinyoshida.design@gmail.com?subject=Project%20enquiry">
+            Contact me <span class="btn__arrow" aria-hidden="true">→</span>
+          </a>
+          <a class="cta__mail link link--on" href="mailto:jinyoshida.design@gmail.com">jinyoshida.design@gmail.com</a>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -772,6 +729,8 @@
 <!--/BUILD:footer-->
 
 <script src="../assets/js/vendor/lenis.min.js" defer></script>
-<script src="../assets/js/main.js" defer></script>
+<script src="../assets/js/main.js?v=cursor-wake-18" defer></script>
+<script type="module" src="../assets/js/dither-cursor.js?v=10"></script>
+<script type="module" src="../assets/js/about-owl.js?v=mobile-owl-15"></script>
 </body>
 </html>

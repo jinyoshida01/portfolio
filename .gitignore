@@ -5,3 +5,7 @@
 # Git ignores them, so a GitHub Pages deploy never carries them.
 # Delete this line if you'd rather keep them in the repo.
 templates/
+
+# Build templates are required source, unlike the starter project examples.
+!tools/templates/
+!tools/templates/*.html

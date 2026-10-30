@@ -1,0 +1,124 @@
+/* Chapters applies only to the sections below the About hero. */
+.about-page--chapters > .section .section-head {
+  border-bottom: 1px solid var(--line);
+  padding-bottom: clamp(1.75rem, 3vw, 2.75rem);
+  margin-bottom: clamp(2rem, 4vw, 3.5rem);
+}
+.about-page--chapters .section-head__title {
+  font-size: clamp(2rem, 7vw, 6.5rem);
+  line-height: 1.05;
+  letter-spacing: -.055em;
+  max-width: none;
+}
+
+/* Leave room for glyph overhang inside the animated heading masks. */
+.about-page--chapters .section-head__title .ln {
+  padding-inline: .1em;
+  margin-inline: -.1em;
+}
+
+/* Add columns as space allows, keeping readable widths and at most four lanes. */
+.about-page--chapters .caps {
+  --cap-column-gap: clamp(1.5rem, 2.5vw, 3rem);
+  --cap-min-width: max(20rem, calc((100% - 3 * var(--cap-column-gap)) / 4));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--cap-min-width)), 1fr));
+  gap: clamp(2rem, 4vw, 4rem) var(--cap-column-gap);
+}
+.about-page--chapters .cap {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  gap: .9rem;
+  overflow: visible;
+}
+.about-page--chapters .cap::before,
+.about-page--chapters .cap::after { content: none; }
+/* Lucide outline icons pair with the existing chapter numbers. */
+.about-page--chapters .cap__top {
+  display: flex;
+  align-items: center;
+  gap: .85rem;
+  min-height: 2rem;
+}
+.about-page--chapters .cap__icon {
+  width: 1.75rem;
+  height: 1.75rem;
+  flex: 0 0 1.75rem;
+  color: var(--ink);
+}
+.about-page--chapters .cap__n { color: var(--ember); margin: 0; }
+.about-page--chapters .cap__t {
+  font-size: clamp(1.4rem, 2.5vw, 2.1rem);
+  min-height: 0;
+  line-height: 1.25;
+}
+.about-page--chapters .cap__d { font-size: var(--step-0); max-width: 60ch; flex: none; }
+.about-page--chapters .cap__k { gap: .4rem 1.2rem; margin-top: 0; }
+.about-page--chapters .cap__k li { padding: 0; border: 0; border-radius: 0; }
+
+/* Card hover transitions must also retain the scroll reveal's fade and rise. */
+.about-page--chapters :is(.cap, .tool)[data-reveal] {
+  transition:
+    opacity .85s cubic-bezier(.22, 1, .36, 1) min(var(--d, 0ms), 320ms),
+    transform 1s cubic-bezier(.22, 1, .36, 1) min(var(--d, 0ms), 320ms),
+    background-color .4s linear,
+    border-color .45s linear;
+}
+.about-page--chapters :is(.cap, .tool)[data-reveal]:not(.is-in) {
+  transform: translateY(22px);
+}
+
+/* A continuous spine joins each employment entry. */
+.about-page--chapters .roles {
+  border-top: 0;
+  border-left: 1px solid var(--line);
+  margin-left: .6rem;
+  padding-left: clamp(1.6rem, 3vw, 3rem);
+}
+.about-page--chapters .role {
+  grid-template-columns: 8rem minmax(0, 1fr);
+  gap: .5rem clamp(1.5rem, 3.5vw, 4rem);
+  padding: 0 0 clamp(2.5rem, 4vw, 4.5rem);
+  border: 0;
+  overflow: visible;
+}
+.about-page--chapters .role::before {
+  inset: .45rem auto auto calc(-1 * clamp(1.6rem, 3vw, 3rem) - 5px);
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--ember);
+  transform: none;
+}
+.about-page--chapters .role__yr { grid-column: 1; grid-row: 1 / 4; color: var(--ember); }
+.about-page--chapters .role__t {
+  grid-column: 2;
+  font-size: clamp(1.3rem, 2.5vw, 2.1rem);
+  line-height: 1.25;
+}
+.about-page--chapters .role:hover .role__t { transform: none; }
+.about-page--chapters .role__c,
+.about-page--chapters .role__d { grid-column: 2; }
+.about-page--chapters .role__d { justify-self: start; text-align: left; white-space: normal; }
+.about-page--chapters .roles__note { border-top: 1px solid var(--line); margin-top: 1.5rem; padding-top: 1.5rem; }
+
+.about-page--chapters .chapter-contact { max-width: 46rem; }
+.about-page--chapters .chapter-contact .prose {
+  font-family: var(--title);
+  font-size: clamp(1.3rem, 2.45vw, 2rem);
+  font-weight: 500;
+  line-height: 1.45;
+  letter-spacing: -.025em;
+  color: var(--ink);
+}
+.about-page--chapters .cta__mail { font-size: var(--step-0); overflow-wrap: anywhere; min-width: 0; }
+
+@media (max-width: 700px) {
+  .about-page--chapters .caps { grid-template-columns: 1fr; }
+  .about-page--chapters .role { grid-template-columns: minmax(0, 1fr); gap: .5rem; }
+  .about-page--chapters .role__yr,
+  .about-page--chapters .role__t,
+  .about-page--chapters .role__c,
+  .about-page--chapters .role__d { grid-column: 1; grid-row: auto; }
+  .about-page--chapters .role__yr { margin-bottom: .25rem; }
+}

@@ -279,7 +279,7 @@ def load_projects():
 
 
 # ---------------------------------------------------------------- render
-def render_card(p, href, cover, eager):
+def render_card(p, href, cover, eager, include_summary=False):
     tags = " · ".join(p["tags"][:3]) if p["tags"] else ""
     return fill(read(os.path.join(TPL, "card.html")),
                 href=href,
@@ -294,7 +294,9 @@ def render_card(p, href, cover, eager):
                 title_plain=attr(plain(p["title"])),
                 tags_plain=attr(tags.lower() or "project"),
                 tags=tags,
-                year=p["year"])
+                year=p["year"],
+                summary_block=('              <p class="card__summary">%s</p>\n' % p['summary'])
+                    if include_summary and p.get('summary') else '')
 
 
 EMBED_RX = re.compile(
@@ -589,6 +591,8 @@ def render_case(p, i, total, nxt):
 
     if p["gallery_files"]:
         tiles = []
+        motion_tiles = []
+        motion_grid = p.get("gallery_motion_columns") == 3
         posters = p.get("posters") or {}
         sources = p.get("sources") or {}
         imgdir = os.path.join(ROOT, "work", p["slug"], "images")
@@ -602,16 +606,21 @@ def render_case(p, i, total, nxt):
             # The lead image always runs full width. After that, only pictures
             # wide enough to earn it do — so a panorama gets the room it needs
             # and a portrait shot isn't stretched across the page.
-            wide = k == 0 or (size and size[0] / float(size[1]) >= 1.7)
+            wide = not (motion_grid and f in sources) and (k == 0 or (size and size[0] / float(size[1]) >= 1.7))
             cls = "plate plate--full" if wide else "plate"
-            tiles.append(render_tile(f, posters.get(f), sources.get(f, []),
-                                     cls, size, plain(p["title"])))
-        has_vid = any(f in sources for f in p["gallery_files"])
-        label = "Selected work" if has_vid else "Selected imagery"
+            target = motion_tiles if motion_grid and f in sources else tiles
+            target.append(render_tile(f, posters.get(f), sources.get(f, []),
+                                      cls, size, plain(p["title"])))
+        grids = []
+        if motion_tiles:
+            grids.append('            <div class="gallery gallery--motion-grid" data-stagger="70">\n%s\n            </div>' % "\n".join(motion_tiles))
+        if tiles:
+            extra = " gallery--after-motion" if motion_tiles else ""
+            grids.append('            <div class="gallery%s" data-stagger="140">\n%s\n            </div>' % (extra, "\n".join(tiles)))
         parts.append('          <div class="case-block">\n'
-                     '            <p class="eyebrow" style="margin-bottom:1.2rem">%s</p>\n'
-                     '            <div class="gallery" data-stagger="140">\n%s\n            </div>\n'
-                     '          </div>' % (label, "\n".join(tiles)))
+                     '            <p class="eyebrow" style="margin-bottom:1.2rem">Gallery</p>\n'
+                     '%s\n'
+                     '          </div>' % "\n".join(grids))
 
     gallery = "\n".join(parts) if parts else (
         '          <!-- Drop images or video into images/ and rebuild — they become\n'
@@ -889,6 +898,15 @@ def home_hero():
 
     A .jpg wins over a .svg when both are present, so the placeholder can stay
     where it is as a reference without ever showing up on the page again."""
+    # Fallback only: owl-hero.js replaces this with real 3D geometry on load.
+    owl = os.path.join(ROOT, *HOME_HERO_DIR, "owl-head-fallback.png")
+    if os.path.exists(owl):
+        w, h = image_size(owl) or (800, 800)
+        return ('<img class="hero__portrait hero__portrait--owl" '
+                'src="assets/img/home/owl-head-fallback.png?v=original-owl-4"\n'
+                '           alt=""\n'
+                '           width="%d" height="%d" loading="eager" decoding="async">'
+                % (w, h))
     found = None
     for ext in HOME_HERO_ORDER:
         cand = os.path.join(ROOT, *HOME_HERO_DIR, "hero" + ext)
@@ -949,6 +967,11 @@ def about_portrait():
     layout built around it, so it always renders something. What it doesn't do
     is hard-code the extension, which is what previously made dropping a
     portrait.jpg in beside the placeholder a no-op."""
+    # The About owl uses a compact raster fallback to avoid a heavy SVG layer.
+    if os.path.exists(os.path.join(ROOT, "assets/img/about/owl-full-body.png")):
+        return ('<img class="frame__media" src="../assets/img/about/owl-full-body-soft-low.png?v=soft-low-11" '
+                'alt="Full-body owl sculpture" width="960" height="700" loading="eager" '
+                'fetchpriority="high" decoding="async">')
     order = (".jpg", ".jpeg", ".png", ".webp", ".avif", ".svg")
     for ext in order:
         path = os.path.join(ROOT, *BAND_DIR, "portrait" + ext)
@@ -960,7 +983,7 @@ def about_portrait():
             print("  · assets/img/about/portrait.svg is still the placeholder — "
                   "drop a portrait.jpg in beside it and rebuild")
         return ('<img class="frame__media" src="../assets/img/about/portrait%s" '
-                'alt="%s" width="%d" height="%d" loading="lazy" decoding="async">'
+                'alt="%s" width="%d" height="%d" loading="eager" fetchpriority="high" decoding="async">'
                 % (ext,
                    "Placeholder portrait. Replace with a photo of yourself"
                    if placeholder else "Jin Yoshida",
@@ -1107,10 +1130,10 @@ def build():
               render_case(p, i + 1, total, nxt))
 
     # work archive
-    # the archive uses bands, not cards — one project per row, sides alternating
-    cards = [render_band(p, page("%s/" % p["slug"]),
+    # Use the same adaptable cards as the homepage, retaining archive summaries.
+    cards = [render_card(p, page("%s/" % p["slug"]),
                          "%s/images/%s" % (p["slug"], p["cover_file"]) if p["cover_file"] else None,
-                         i + 1, total, i < 2)
+                         i < 3, include_summary=True)
              for i, p in enumerate(projects)]
     write(os.path.join(WORK, "index.html"),
           fill(read(os.path.join(TPL, "work-index.html")),
@@ -1134,15 +1157,13 @@ def build():
     # keep the homepage's hand-written links to the archive in the same style
     html = re.sub(r'href="work/(index\.html)?"', 'href="%s"' % page("work/"), html)
     html = inject(html, "work-grid", "\n" + "\n".join(home_cards) + "\n      ")
-    html = inject(html, "count", "%02d" % len(highlights))
-    html = inject(html, "count2", "%02d" % len(highlights))
     html = inject(html, "all-link", "See all %d projects" % total)
     html = inject(html, "footer", "\n" + footer("", "#contact") + "\n")
     html = inject(html, "signature", signature())
     html = inject(html, "social", "\n" + social("") + "\n")
     html = inject(html, "home-hero", "\n      " + home_hero() + "\n    ")
-    # The skills block appears on the home page as well as the About page, and
-    # both are filled from content/about.json, so there is one source for it.
+    # Skills and software share content/about.json. The homepage shows both;
+    # About shows only the software tiles.
     sets, tiles = about_content()
     if sets is not None:
         html = inject(html, "skillsets", "\n" + sets + "\n        ")
@@ -1160,7 +1181,6 @@ def build():
         about = inject(about, "about-band", about_band())
         about = inject(about, "about-portrait", about_portrait())
         if sets is not None:
-            about = inject(about, "skillsets", "\n" + sets + "\n        ")
             about = inject(about, "tools", "\n" + tiles + "\n        ")
         write(about_path, about)
 

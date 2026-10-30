@@ -726,7 +726,8 @@
 
   /* 11 — cursor + magnetic ------------------------------------------------*/
   function setupCursor() {
-    if (!fine || reduce) return;
+    // The shared cursor module supplies the outline; keep this legacy ring opt-in only.
+    if (!fine || reduce || new URLSearchParams(location.search).get('cursor') !== 'classic') return;
 
     var ring = document.createElement('div'); ring.className = 'cursor';
     var dot  = document.createElement('div'); dot.className  = 'cursor-dot';
